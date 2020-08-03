@@ -12,12 +12,67 @@
     
     <item>
       <title></title>
-      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/</link>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/</guid>
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</guid>
+      <description>   Home   Install   Usage   Roles   Config   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   &amp;ldquo;Meta&amp;rdquo;   Drupal 8   Matomo   Mautic     Sync roles   Database sync   Database sync - MySQL           </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</guid>
+      <description>Contribute Documentation </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</guid>
+      <description>Install The stack only gets tested on Debian Buster, but should run on any Linux distribution, as long as Ansible &amp;gt;=2.9 is present. You can install either:
+ through ce-provision  manually by running a local playbook with Docker (soon)  Install with ce-provision The companion ce-provision stack already provides an &amp;ldquo;ce_deploy&amp;rdquo; role you can add to your playbooks. This is the recommended way if you use ce-provision already.
+Install manually Dependencies The main prerequesites are obviously Ansible and git.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/readme/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/readme/</guid>
       <description>ce-deploy A set of Ansible roles and wrapper scripts to deploy (web) applications.
 Overview The &amp;ldquo;stack&amp;rdquo; from this repo is to be installed on a &amp;ldquo;deploy&amp;rdquo; server/runner, to be used in conjonction with a CI/CD tool (Jenkins, Gitlab, Travis, &amp;hellip;). It allows the deploy steps for a given app to be easily customizable at will, and to be stored alongside the codebase of the project. When triggered from a deployment tool, the stack will clone the codebase and &amp;ldquo;play&amp;rdquo; a given deploy playbook from there.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</guid>
+      <description>Roles Ansible roles and group of roles that constitute the deploy stack.
+Sync roles  Roles that sync data/assets between environments.
+Database sync  Roles that sync databases between environments.
+&amp;ldquo;Meta&amp;rdquo;  Roles that bundles other individual roles together for tackling common use cases.
+Drupal 8  Role for deploying single Drupal 8 instances, or multisites with a single database.
+Data backups  Generate backups for each build.
+MySQL backups  Generate MySQL backups for each build.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</guid>
+      <description>Usage While you can re-use/fork roles or call playbooks directly from your deployment tool, it is recommended to use the provided wrapper scripts, as they will take care of setting up the needed environments.
+Deploy with the &amp;ldquo;build&amp;rdquo; script In the script folder, you&amp;rsquo;ll see a build.sh script. This is the easiest/safest way to trigger deployments, as it bundles all the steps in one.
+Arguments You will need to pass at least the following information:</description>
     </item>
     
   </channel>

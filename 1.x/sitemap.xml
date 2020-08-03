@@ -3,7 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/</loc>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/readme/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</loc>
     <priority>0</priority>
   </url>
   

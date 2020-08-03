@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>ce-deploy</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  
+  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
+</head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
+        <h1 id="roles">Roles</h1>
+<p>Ansible roles and group of roles that constitute the deploy stack.</p>
+<!-- raw HTML omitted -->
+<h2 id="sync-rolessyncreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/sync/README.md" >Sync roles</a>
+</h2>
+<p>Roles that sync data/assets between environments.</p>
+<h3 id="database-syncsyncdatabase_syncreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/sync/database_sync/README.md" >Database sync</a>
+</h3>
+<p>Roles that sync databases between environments.</p>
+<h2 id="meta_metareadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/_meta/README.md" >&ldquo;Meta&rdquo;</a>
+</h2>
+<p>Roles that bundles other individual roles together for tackling common use cases.</p>
+<h3 id="drupal-8_metadeploy-drupal8readmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/_meta/deploy-drupal8/README.md" >Drupal 8</a>
+</h3>
+<p>Role for deploying single Drupal 8 instances, or multisites with a single database.</p>
+<h2 id="data-backupsdatabase_backupreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/database_backup/README.md" >Data backups</a>
+</h2>
+<p>Generate backups for each build.</p>
+<h3 id="mysql-backupsdatabase_backupdatabase_backup-mysqlreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/database_backup/database_backup-mysql/README.md" >MySQL backups</a>
+</h3>
+<p>Generate MySQL backups for each build.</p>
+<h2 id="croncronreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/cron/README.md" >Cron</a>
+</h2>
+<p>Roles to generate cron entries.</p>
+<h3 id="database-backup-cron-taskcroncron_database_backupreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/cron/cron_database_backup/README.md" >Database backup cron task</a>
+</h3>
+<p>Ensure regular local backups of databases.</p>
+<h2 id="code-deploymentcodereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/code/README.md" >Code deployment</a>
+</h2>
+<p>Roles managing the codebase: deployment, symlinks, composer steps, &hellip;</p>
+<h3 id="deploycodedeploy_codereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/code/deploy_code/README.md" >Deploy</a>
+</h3>
+<p>Step that deploys the codebase.</p>
+<h3 id="configcodeconfig_generatereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/code/config_generate/README.md" >Config</a>
+</h3>
+<p>Generates config files and handles sensitive variables.</p>
+<h3 id="composercodecomposerreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/code/composer/README.md" >Composer</a>
+</h3>
+<p>Performs a composer install on a freshly deployed codebase.</p>
+<h2 id="cli-toolsclireadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/cli/README.md" >CLI Tools</a>
+</h2>
+<p>Roles to install app-specific cli tool and utilities (Drush, &hellip;)</p>
+<h3 id="drushclidrushreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/cli/drush/README.md" >Drush</a>
+</h3>
+<p>Installs the <code>drush</code> command-line tool for the deploy user.</p>
+<!-- raw HTML omitted -->
+
+    </article>
+    <aside>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#roles">Roles</a>
+      <ul>
+        <li><a href="#sync-rolessyncreadmemd"><a href="sync/README.md">Sync roles</a></a>
+          <ul>
+            <li><a href="#database-syncsyncdatabase_syncreadmemd"><a href="sync/database_sync/README.md">Database sync</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#meta_metareadmemd"><a href="_meta/README.md">&ldquo;Meta&rdquo;</a></a>
+          <ul>
+            <li><a href="#drupal-8_metadeploy-drupal8readmemd"><a href="_meta/deploy-drupal8/README.md">Drupal 8</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#data-backupsdatabase_backupreadmemd"><a href="database_backup/README.md">Data backups</a></a>
+          <ul>
+            <li><a href="#mysql-backupsdatabase_backupdatabase_backup-mysqlreadmemd"><a href="database_backup/database_backup-mysql/README.md">MySQL backups</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#croncronreadmemd"><a href="cron/README.md">Cron</a></a>
+          <ul>
+            <li><a href="#database-backup-cron-taskcroncron_database_backupreadmemd"><a href="cron/cron_database_backup/README.md">Database backup cron task</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#code-deploymentcodereadmemd"><a href="code/README.md">Code deployment</a></a>
+          <ul>
+            <li><a href="#deploycodedeploy_codereadmemd"><a href="code/deploy_code/README.md">Deploy</a></a></li>
+            <li><a href="#configcodeconfig_generatereadmemd"><a href="code/config_generate/README.md">Config</a></a></li>
+            <li><a href="#composercodecomposerreadmemd"><a href="code/composer/README.md">Composer</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#cli-toolsclireadmemd"><a href="cli/README.md">CLI Tools</a></a>
+          <ul>
+            <li><a href="#drushclidrushreadmemd"><a href="cli/drush/README.md">Drush</a></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </aside><aside class="menu">
+<p> </p>
+<ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/">Home</a>
+<ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install">Install</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
+<li><a href="roles">Roles</a>
+<ul>
+<li><a href="roles/cache_clear">Config</a>
+<ul>
+<li><a href="roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
+<li><a href="roles/cache_clear/cache_clear-matomo">Matomo</a></li>
+<li><a href="roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
+<li><a href="roles/cache_clear/cache_clear-opcache">Opcache</a></li>
+</ul>
+</li>
+<li><a href="roles/ce_dev">ce-dev</a>
+<ul>
+<li><a href="roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
+</ul>
+</li>
+<li><a href="roles/cli">CLI Tools</a>
+<ul>
+<li><a href="roles/cli/cachetool">Drush</a></li>
+<li><a href="roles/cli/drush">Drush</a></li>
+</ul>
+</li>
+<li><a href="roles/composer">Composer</a></li>
+<li><a href="roles/config_generate">Config</a>
+<ul>
+<li><a href="roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
+<li><a href="roles/config_generate/config_generate-matomo">Drupal 8</a></li>
+<li><a href="roles/config_generate/config_generate-mautic">Mautic</a></li>
+</ul>
+</li>
+<li><a href="roles/cron">Cron</a>
+<ul>
+<li><a href="roles/cron/cron_database_backup">Database backup cron task</a>
+<ul>
+<li><a href="roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
+</ul>
+</li>
+<li><a href="roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
+<li><a href="roles/cron/cron_mautic">Mautic cron tasks</a></li>
+</ul>
+</li>
+<li><a href="roles/database_backup">Data backups</a>
+<ul>
+<li><a href="roles/database_backup/database_backup-mysql">MySQL backups</a></li>
+</ul>
+</li>
+<li><a href="roles/deploy_code">Deploy</a></li>
+<li><a href="roles/_meta">&ldquo;Meta&rdquo;</a>
+<ul>
+<li><a href="roles/_meta/deploy-drupal8">Drupal 8</a></li>
+<li><a href="roles/_meta/deploy-matomo">Matomo</a></li>
+<li><a href="roles/_meta/deploy-mautic">Mautic</a></li>
+</ul>
+</li>
+<li><a href="roles/sync">Sync roles</a>
+<ul>
+<li><a href="roles/sync/database_sync">Database sync</a>
+<ul>
+<li><a href="roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</aside>
+    </body>
+</html>
