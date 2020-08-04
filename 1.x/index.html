@@ -8,10 +8,106 @@
   
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
-        
+        <h1 id="ce-deploy">ce-deploy</h1>
+<p>A set of Ansible roles and wrapper scripts to deploy (web) applications.</p>
+<h2 id="overview">Overview</h2>
+<p>The &ldquo;stack&rdquo; from this repo is to be installed on a &ldquo;deploy&rdquo; server/runner, to be used in conjonction with a CI/CD tool (Jenkins, Gitlab, Travis, &hellip;).
+It allows the deploy steps for a given app to be easily customizable at will, and to be stored alongside the codebase of the project.
+When triggered from a deployment tool, the stack will clone the codebase and &ldquo;play&rdquo; a given deploy playbook from there.</p>
+<!-- raw HTML omitted -->
+<h2 id="installinstallreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md" >Install</a>
+</h2>
+<p>The stack only gets tested on Debian Buster, but should run on any Linux distribution, as long as Ansible &gt;=2.9 is present.
+You can install either:</p>
+<ul>
+<li>through 
+<a href="https://github.com/codeenigma/ce-provision"  target="_blank" rel="noopener">ce-provision</a>
+</li>
+<li>manually by running a local playbook</li>
+<li>with Docker (soon)</li>
+</ul>
+<h2 id="usagescriptsreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/README.md" >Usage</a>
+</h2>
+<p>While you can re-use/fork roles or call playbooks directly from your deployment tool, it is recommended to use the provided wrapper scripts, as they will take care of setting up the needed environments.</p>
+<h2 id="rolesrolesreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/README.md" >Roles</a>
+</h2>
+<p>Ansible roles and group of roles that constitute the deploy stack.</p>
+<h3 id="configrolescache_clearreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/README.md" >Config</a>
+</h3>
+<p>Cache clearing commands.</p>
+<h3 id="ce-devrolesce_devreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/README.md" >ce-dev</a>
+</h3>
+<p>Roles that integrate with local dev environments.</p>
+<h3 id="cli-toolsrolesclireadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/README.md" >CLI Tools</a>
+</h3>
+<p>Roles to install app-specific cli tool and utilities (Drush, &hellip;)</p>
+<h3 id="composerrolescomposerreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/README.md" >Composer</a>
+</h3>
+<p>Performs a composer install on a freshly deployed codebase.</p>
+<h3 id="configrolesconfig_generatereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/README.md" >Config</a>
+</h3>
+<p>Generates config files and handles sensitive variables.</p>
+<h3 id="cronrolescronreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/README.md" >Cron</a>
+</h3>
+<p>Roles to generate cron entries.</p>
+<h3 id="data-backupsrolesdatabase_backupreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/README.md" >Data backups</a>
+</h3>
+<p>Generate backups for each build.</p>
+<h3 id="deployrolesdeploy_codereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/README.md" >Deploy</a>
+</h3>
+<p>Step that deploys the codebase.</p>
+<h3 id="metarolesmetareadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/meta/README.md" >&ldquo;Meta&rdquo;</a>
+</h3>
+<p>Roles that bundles other individual roles together for tackling common use cases.</p>
+<h3 id="sync-rolesrolessyncreadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/README.md" >Sync roles</a>
+</h3>
+<p>Roles that sync data/assets between environments.</p>
+<h2 id="contributecontributereadmemd">
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/README.md" >Contribute</a>
+</h2>
+<!-- raw HTML omitted -->
+
     </article>
     <aside>
-        
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ce-deploy">ce-deploy</a>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#installinstallreadmemd"><a href="install/README.md">Install</a></a></li>
+        <li><a href="#usagescriptsreadmemd"><a href="scripts/README.md">Usage</a></a></li>
+        <li><a href="#rolesrolesreadmemd"><a href="roles/README.md">Roles</a></a>
+          <ul>
+            <li><a href="#configrolescache_clearreadmemd"><a href="roles/cache_clear/README.md">Config</a></a></li>
+            <li><a href="#ce-devrolesce_devreadmemd"><a href="roles/ce_dev/README.md">ce-dev</a></a></li>
+            <li><a href="#cli-toolsrolesclireadmemd"><a href="roles/cli/README.md">CLI Tools</a></a></li>
+            <li><a href="#composerrolescomposerreadmemd"><a href="roles/composer/README.md">Composer</a></a></li>
+            <li><a href="#configrolesconfig_generatereadmemd"><a href="roles/config_generate/README.md">Config</a></a></li>
+            <li><a href="#cronrolescronreadmemd"><a href="roles/cron/README.md">Cron</a></a></li>
+            <li><a href="#data-backupsrolesdatabase_backupreadmemd"><a href="roles/database_backup/README.md">Data backups</a></a></li>
+            <li><a href="#deployrolesdeploy_codereadmemd"><a href="roles/deploy_code/README.md">Deploy</a></a></li>
+            <li><a href="#metarolesmetareadmemd"><a href="roles/meta/README.md">&ldquo;Meta&rdquo;</a></a></li>
+            <li><a href="#sync-rolesrolessyncreadmemd"><a href="roles/sync/README.md">Sync roles</a></a></li>
+          </ul>
+        </li>
+        <li><a href="#contributecontributereadmemd"><a href="contribute/README.md">Contribute</a></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </aside><aside class="menu">
 <p> </p>
 <ul>
@@ -21,62 +117,62 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
 <li><a href="roles">Roles</a>
 <ul>
-<li><a href="roles/cache_clear">Config</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
-<li><a href="roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
-<li><a href="roles/cache_clear/cache_clear-matomo">Matomo</a></li>
-<li><a href="roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
-<li><a href="roles/cache_clear/cache_clear-opcache">Opcache</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache">Opcache</a></li>
 </ul>
 </li>
-<li><a href="roles/ce_dev">ce-dev</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev">ce-dev</a>
 <ul>
-<li><a href="roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
 </ul>
 </li>
-<li><a href="roles/cli">CLI Tools</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli">CLI Tools</a>
 <ul>
-<li><a href="roles/cli/cachetool">Drush</a></li>
-<li><a href="roles/cli/drush">Drush</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool">Drush</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush">Drush</a></li>
 </ul>
 </li>
-<li><a href="roles/composer">Composer</a></li>
-<li><a href="roles/config_generate">Config</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
 <ul>
-<li><a href="roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
-<li><a href="roles/config_generate/config_generate-matomo">Drupal 8</a></li>
-<li><a href="roles/config_generate/config_generate-mautic">Mautic</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
 </ul>
 </li>
-<li><a href="roles/cron">Cron</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron">Cron</a>
 <ul>
-<li><a href="roles/cron/cron_database_backup">Database backup cron task</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup">Database backup cron task</a>
 <ul>
-<li><a href="roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
 </ul>
 </li>
-<li><a href="roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
-<li><a href="roles/cron/cron_mautic">Mautic cron tasks</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
 </ul>
 </li>
-<li><a href="roles/database_backup">Data backups</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup">Data backups</a>
 <ul>
-<li><a href="roles/database_backup/database_backup-mysql">MySQL backups</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql">MySQL backups</a></li>
 </ul>
 </li>
-<li><a href="roles/deploy_code">Deploy</a></li>
-<li><a href="roles/_meta">&ldquo;Meta&rdquo;</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
 <ul>
-<li><a href="roles/_meta/deploy-drupal8">Drupal 8</a></li>
-<li><a href="roles/_meta/deploy-matomo">Matomo</a></li>
-<li><a href="roles/_meta/deploy-mautic">Mautic</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
 </ul>
 </li>
-<li><a href="roles/sync">Sync roles</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync">Sync roles</a>
 <ul>
-<li><a href="roles/sync/database_sync">Database sync</a>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync">Database sync</a>
 <ul>
-<li><a href="roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
 </ul>
 </li>
 </ul>

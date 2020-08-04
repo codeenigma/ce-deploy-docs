@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</loc>
     <priority>0</priority>
   </url>
@@ -18,13 +23,128 @@
   </url>
   
   <url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/readme/</loc>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
-    <priority>0</priority>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</loc>
   </url>
   
   <url>
@@ -37,7 +157,7 @@
   </url>
   
   <url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/</loc>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
   </url>
   
   <url>

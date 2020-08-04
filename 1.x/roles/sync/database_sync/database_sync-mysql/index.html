@@ -7,151 +7,59 @@
   
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
-        <p> </p>
-<ul>
-<li>
-<a href="//" >Home</a>
+        <h1 id="database-sync---mysql">Database sync - MySQL</h1>
+<p>Sync MySQL databases between environments.</p>
+<!-- raw HTML omitted -->
+<h2 id="default-variables">Default variables</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 
-<ul>
-<li>
-<a href="//install" >Install</a>
-</li>
-<li>
-<a href="//scripts" >Usage</a>
-</li>
-<li>
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles" >Roles</a>
-
-<ul>
-<li>
-<a href="//roles/cache_clear" >Config</a>
-
-<ul>
-<li>
-<a href="//roles/cache_clear/cache_clear-drupal8" >Drupal 8</a>
-</li>
-<li>
-<a href="//roles/cache_clear/cache_clear-matomo" >Matomo</a>
-</li>
-<li>
-<a href="//roles/cache_clear/cache_clear-mautic" >Drupal 8</a>
-</li>
-<li>
-<a href="//roles/cache_clear/cache_clear-opcache" >Opcache</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/ce_dev" >ce-dev</a>
-
-<ul>
-<li>
-<a href="//roles/ce_dev/ce_dev_prebuild" >ce-dev prebuild</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/cli" >CLI Tools</a>
-
-<ul>
-<li>
-<a href="//roles/cli/cachetool" >Drush</a>
-</li>
-<li>
-<a href="//roles/cli/drush" >Drush</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/composer" >Composer</a>
-</li>
-<li>
-<a href="//roles/config_generate" >Config</a>
-
-<ul>
-<li>
-<a href="//roles/config_generate/config_generate-drupal8" >Drupal 8</a>
-</li>
-<li>
-<a href="//roles/config_generate/config_generate-matomo" >Drupal 8</a>
-</li>
-<li>
-<a href="//roles/config_generate/config_generate-mautic" >Mautic</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/cron" >Cron</a>
-
-<ul>
-<li>
-<a href="//roles/cron/cron_database_backup" >Database backup cron task</a>
-
-<ul>
-<li>
-<a href="//roles/cron/cron_database_backup/cron_database_backup-mysql" >Database backup cron task - MySQL</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/cron/cron_matomo" >Database backup cron task - MySQL</a>
-</li>
-<li>
-<a href="//roles/cron/cron_mautic" >Mautic cron tasks</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/database_backup" >Data backups</a>
-
-<ul>
-<li>
-<a href="//roles/database_backup/database_backup-mysql" >MySQL backups</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/deploy_code" >Deploy</a>
-</li>
-<li>
-<a href="//roles/_meta" >&ldquo;Meta&rdquo;</a>
-
-<ul>
-<li>
-<a href="//roles/_meta/deploy-drupal8" >Drupal 8</a>
-</li>
-<li>
-<a href="//roles/_meta/deploy-matomo" >Matomo</a>
-</li>
-<li>
-<a href="//roles/_meta/deploy-mautic" >Mautic</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="//roles/sync" >Sync roles</a>
-
-<ul>
-<li>
-<a href="//roles/sync/database_sync" >Database sync</a>
-
-<ul>
-<li>
-<a href="//roles/sync/database_sync/database_sync-mysql" >Database sync - MySQL</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<span style="color:#66d9ef">mysql_sync</span>:
+  <span style="color:#66d9ef">databases</span>:
+    - <span style="color:#66d9ef">source</span>:
+        <span style="color:#75715e"># Name of the database to take a dump from.</span>
+        <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_prod&#34;</span>
+        <span style="color:#75715e"># Host that can connect to the database.</span>
+        <span style="color:#66d9ef">host</span>: <span style="color:#e6db74">&#34;localhost&#34;</span>
+        <span style="color:#75715e"># Creds file on the host.</span>
+        <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+        <span style="color:#75715e"># This can be of types:</span>
+        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.@todo</span>
+        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
+        <span style="color:#75715e"># - dump: Use an existing dump. In that case, the &#34;database&#34; variable is the absolute file path.</span>
+        <span style="color:#66d9ef">type</span>: fixed
+        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
+        <span style="color:#66d9ef">build_info</span>:
+          <span style="color:#66d9ef">repo</span>: <span style="color:#e6db74">&#34;&#34;</span>
+          <span style="color:#66d9ef">branch</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+          <span style="color:#66d9ef">build_type</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+      <span style="color:#66d9ef">target</span>:
+          <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_dev&#34;</span>
+          <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+          <span style="color:#75715e"># This can be of types:</span>
+          <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.</span>
+          <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
+          <span style="color:#75715e"># - dump: Creates a dump file on the target server. In that case, the &#34;database&#34; variable is the absolute file path.</span>
+          <span style="color:#66d9ef">type</span>: fixed
+          <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
+          <span style="color:#66d9ef">build_info</span>:
+            <span style="color:#66d9ef">repo</span>: <span style="color:#e6db74">&#34;&#34;</span>
+            <span style="color:#66d9ef">branch</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+            <span style="color:#66d9ef">build_type</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+</code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 
     </article>
     <aside>
-        <nav id="TableOfContents"></nav>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#database-sync---mysql">Database sync - MySQL</a>
+      <ul>
+        <li><a href="#default-variables">Default variables</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </aside><aside class="menu">
 <p> </p>
 <ul>
