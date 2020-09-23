@@ -268,6 +268,16 @@ Default variables --- deploy_code: # Specify any additional symlink to create, w
     
     <item>
       <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</guid>
+      <description>NPM Performs npm or yarn tasks on a freshly deployed codebase.
+Default variables --- npm: # npm/yarn executor: npm working_dir: &amp;#34;{{ deploy_path }}&amp;#34; # A list of commands to execute. commands: [] # eg: # - install # - build-prod </description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

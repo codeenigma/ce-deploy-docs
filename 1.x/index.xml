@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</guid>
-      <description>   Home   Install   Usage   Roles   Config   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   &amp;ldquo;Meta&amp;rdquo;   Drupal 8   Matomo   Mautic     Sync roles   Database sync   Database sync - MySQL           </description>
+      <description>   Home   Install   Usage   Roles   Config   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   &amp;ldquo;Meta&amp;rdquo;   Drupal 8   Matomo   Mautic     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
     </item>
     
     <item>
@@ -302,6 +302,16 @@ Default variables --- mysql_backup: handling: rolling dumps_directory: &amp;#34;
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</guid>
       <description>Deploy Step that deploys the codebase.
 Default variables --- deploy_code: # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # create: wether to create the target if it does not exists. # - src: &amp;#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; # - src: &amp;#39;/var/simplesaml/etc&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; symlinks: [] # Number of builds to keep.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</guid>
+      <description>NPM Performs npm or yarn tasks on a freshly deployed codebase.
+Default variables --- npm: # npm/yarn executor: npm working_dir: &amp;#34;{{ deploy_path }}&amp;#34; # A list of commands to execute. commands: [] # eg: # - install # - build-prod </description>
     </item>
     
     <item>
