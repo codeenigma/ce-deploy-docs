@@ -14,7 +14,6 @@
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-
 <span style="color:#66d9ef">deploy_code</span>:
   <span style="color:#75715e"># Specify any additional symlink to create, with src (target) and dest (link).</span>
   <span style="color:#75715e"># src: can be either absolute or relative to the dest (eg. &#39;/var/my_data&#39;, &#39;/home/deploy/simplesaml&#39;, &#39;../../../myconfig&#39;)</span>
@@ -27,6 +26,10 @@
   <span style="color:#66d9ef">symlinks</span>: []
   <span style="color:#75715e"># Number of builds to keep. Note this is independant of databases/dump.</span>
   <span style="color:#66d9ef">keep</span>: <span style="color:#ae81ff">10</span>
+  <span style="color:#75715e"># Wether to sync the local deploy base to a shared destination, after successful build.</span>
+  <span style="color:#66d9ef">mount_sync</span>: <span style="color:#66d9ef">false</span>
+  <span style="color:#66d9ef">mount_sync_tarball</span>: /mnt/directory/project.tar
+
 </code></pre></div><!-- raw HTML omitted -->
 
     </article>
