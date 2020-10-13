@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</guid>
-      <description>   Home   Install   Usage   Roles   Config   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   &amp;ldquo;Meta&amp;rdquo;   Drupal 8   Matomo   Mautic     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
+      <description>   Home   Install   Usage   Roles   Config   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Drupal 8 cron   Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   &amp;ldquo;Meta&amp;rdquo;   Drupal 8   Matomo   Mautic     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
     </item>
     
     <item>
@@ -252,6 +252,16 @@ Default variables --- </description>
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</guid>
       <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.
 Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ deploy_user }}/db_backups/mysql/regular/{{ project_name }}/{{ build_type }}&amp;#34; keep: 10 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</guid>
+      <description>Drupal 8 cron Ensure Drupal cron entries are run.
+Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 job: cron </description>
     </item>
     
     <item>

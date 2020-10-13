@@ -116,6 +116,10 @@
   </url>
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</loc>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo/</loc>
   </url>
   
