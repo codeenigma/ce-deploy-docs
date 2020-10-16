@@ -7,36 +7,22 @@
   
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
-        <h1 id="npm">NPM</h1>
-<p>Performs npm or yarn tasks on a freshly deployed codebase.</p>
+        <h1 id="admin-credentials">Admin credentials</h1>
+<p>Reset the admin username and/or password on each build.</p>
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">npm</span>:
-  <span style="color:#75715e"># npm/yarn</span>
-  <span style="color:#66d9ef">executor</span>: npm
-  <span style="color:#66d9ef">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>
-  <span style="color:#75715e"># A list of commands to execute.</span>
-  <span style="color:#75715e"># eg:</span>
-  <span style="color:#75715e"># - install</span>
-  <span style="color:#75715e"># - build-prod</span>
-  <span style="color:#66d9ef">commands</span>: []
-  <span style="color:#75715e"># Specify any additional symlink to create, with src (target) and dest (link).</span>
-  <span style="color:#75715e"># src: can be either absolute or relative to the dest (eg. &#39;/var/my_data&#39;, &#39;/home/deploy/simplesaml&#39;, &#39;../../../myconfig&#39;)</span>
-  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/themes/myassets&#39;, &#39;var/cache&#39;)</span>
-  <span style="color:#75715e"># create: wether to create the target if it does not exists.</span>
-  <span style="color:#75715e">#  - src: &#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&#39;</span>
-  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
-  <span style="color:#75715e">#  - src: &#39;/var/simplesaml/etc&#39;</span>
-  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
-  <span style="color:#66d9ef">symlinks</span>: []
+<span style="color:#66d9ef">admin_creds</span>:
+  <span style="color:#66d9ef">username</span>: <span style="color:#e6db74">&#34;{{ lookup(&#39;password&#39;, &#39;/dev/null chars=ascii_letters length=20&#39;) }}&#34;</span>
+  <span style="color:#66d9ef">password</span>: <span style="color:#e6db74">&#34;{{ lookup(&#39;password&#39;, &#39;/dev/null length=40&#39;) }}&#34;</span>
+
 </code></pre></div><!-- raw HTML omitted -->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#npm">NPM</a>
+    <li><a href="#admin-credentials">Admin credentials</a>
       <ul>
         <li><a href="#default-variables">Default variables</a></li>
       </ul>
