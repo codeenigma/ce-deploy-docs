@@ -12,7 +12,6 @@
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-
 <span style="color:#66d9ef">mysql_sync</span>:
   <span style="color:#66d9ef">databases</span>:
     - <span style="color:#66d9ef">source</span>:
@@ -28,23 +27,18 @@
         <span style="color:#75715e"># - dump: Use an existing dump. In that case, the &#34;database&#34; variable is the absolute file path.</span>
         <span style="color:#66d9ef">type</span>: fixed
         <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
-        <span style="color:#66d9ef">build_info</span>:
-          <span style="color:#66d9ef">repo</span>: <span style="color:#e6db74">&#34;&#34;</span>
-          <span style="color:#66d9ef">branch</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
-          <span style="color:#66d9ef">build_type</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+        <span style="color:#66d9ef">build_id</span>: mybuildprod
       <span style="color:#66d9ef">target</span>:
-          <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_dev&#34;</span>
-          <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
-          <span style="color:#75715e"># This can be of types:</span>
-          <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.</span>
-          <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
-          <span style="color:#75715e"># - dump: Creates a dump file on the target server. In that case, the &#34;database&#34; variable is the absolute file path.</span>
-          <span style="color:#66d9ef">type</span>: fixed
-          <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
-          <span style="color:#66d9ef">build_info</span>:
-            <span style="color:#66d9ef">repo</span>: <span style="color:#e6db74">&#34;&#34;</span>
-            <span style="color:#66d9ef">branch</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
-            <span style="color:#66d9ef">build_type</span>: <span style="color:#e6db74">&#34;prod&#34;</span>
+        <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_dev&#34;</span>
+        <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+        <span style="color:#75715e"># This can be of types:</span>
+        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.</span>
+        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
+        <span style="color:#75715e"># - dump: Creates a dump file on the target server. In that case, the &#34;database&#34; variable is the absolute file path.</span>
+        <span style="color:#66d9ef">type</span>: fixed
+        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
+        <span style="color:#66d9ef">build_id</span>: mybuilddev
+
 </code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
