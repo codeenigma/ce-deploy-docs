@@ -21,6 +21,12 @@
         - <span style="color:#66d9ef">minute</span>: <span style="color:#e6db74">&#34;*/{{ 10 | random(start=1) }}&#34;</span>
           <span style="color:#75715e"># hour: 2</span>
           <span style="color:#66d9ef">job</span>: cron
+  <span style="color:#75715e"># If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</span>
+  <span style="color:#66d9ef">defer</span>: <span style="color:#66d9ef">false</span>
+  <span style="color:#75715e"># If defer is set to true, the Ansible target must be declared with defer_target. If using a group, include the index. For example, _ce_www_dev[0]</span>
+  <span style="color:#66d9ef">defer_target</span>: <span style="color:#e6db74">&#34;&#34;</span>
+  <span style="color:#75715e"># Drush location when installed with Composer</span>
+  <span style="color:#66d9ef">drush_location</span>: <span style="color:#e6db74">&#34;vendor/drush/drush/drush&#34;</span>
 
 </code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
@@ -48,6 +54,7 @@
 <ul>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
@@ -68,6 +75,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
@@ -80,6 +88,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
 </ul>
 </li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7">Drupal 7 cron</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8">Drupal 8 cron</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
@@ -91,8 +100,10 @@
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>

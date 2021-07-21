@@ -13,8 +13,9 @@
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 <span style="color:#66d9ef">cron_mysql_backup</span>:
-  <span style="color:#66d9ef">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/db_backups/mysql/regular/{{ project_name }}/{{ build_type }}&#34;</span>
+  <span style="color:#66d9ef">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&#34;</span>
   <span style="color:#66d9ef">keep</span>: <span style="color:#ae81ff">10</span>
+
 </code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
@@ -41,6 +42,7 @@
 <ul>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
@@ -61,6 +63,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
@@ -73,6 +76,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
 </ul>
 </li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7">Drupal 7 cron</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8">Drupal 8 cron</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
@@ -84,8 +88,10 @@
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7">Drupal 7</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>

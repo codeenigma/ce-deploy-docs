@@ -28,7 +28,15 @@
   </url>
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</loc>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7/</loc>
   </url>
   
   <url>
@@ -45,6 +53,10 @@
   
   <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7/</loc>
   </url>
   
   <url>
@@ -92,6 +104,10 @@
   </url>
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7/</loc>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8/</loc>
   </url>
   
@@ -113,6 +129,10 @@
   
   <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</loc>
   </url>
   
   <url>
