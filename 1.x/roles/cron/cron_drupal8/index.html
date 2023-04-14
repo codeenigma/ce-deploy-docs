@@ -20,13 +20,16 @@
       <span style="color:#66d9ef">cron</span>: <span style="color:#75715e"># These are the relevant parts for cron.</span>
         - <span style="color:#66d9ef">minute</span>: <span style="color:#e6db74">&#34;*/{{ 10 | random(start=1) }}&#34;</span>
           <span style="color:#75715e"># hour: 2</span>
+          <span style="color:#75715e"># day:</span>
+          <span style="color:#75715e"># weekday:</span>
+          <span style="color:#75715e"># month:</span>
           <span style="color:#66d9ef">job</span>: cron
+          <span style="color:#75715e"># disabled: true</span>
   <span style="color:#75715e"># If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</span>
   <span style="color:#66d9ef">defer</span>: <span style="color:#66d9ef">false</span>
   <span style="color:#75715e"># If defer is set to true, the Ansible target must be declared with defer_target. If using a group, include the index. For example, _ce_www_dev[0]</span>
   <span style="color:#66d9ef">defer_target</span>: <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># Drush location when installed with Composer</span>
-  <span style="color:#66d9ef">drush_location</span>: <span style="color:#e6db74">&#34;vendor/drush/drush/drush&#34;</span>
+  <span style="color:#66d9ef">drush_location</span>: <span style="color:#e6db74">&#34;{{ drush_bin }}&#34;</span> <span style="color:#75715e"># you might specify another location, e.g. &#34;{{ deploy_path }}/vendor/bin/drush&#34;</span>
 
 </code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
@@ -52,6 +55,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
 <li><a href="roles">Roles</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
@@ -108,6 +112,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>

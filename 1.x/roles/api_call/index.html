@@ -7,42 +7,32 @@
   
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
-        <h1 id="mysql-backups">MySQL backups</h1>
-<p>Generate MySQL backups for each build.</p>
+        <h1 id="api-call">API call</h1>
+<p>Making RESTful API calls to other platforms.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">mysql_backup</span>:
-  <span style="color:#66d9ef">handling</span>: rolling
-  <span style="color:#66d9ef">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&#34;</span>
-  <span style="color:#66d9ef">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here</span>
-  <span style="color:#75715e"># Number of dumps/db to keep. Note this is independant from the build codebases.</span>
-  <span style="color:#66d9ef">keep</span>: <span style="color:#ae81ff">10</span>
-  <span style="color:#75715e"># This can be one of the following:</span>
-  <span style="color:#75715e"># - rotate:</span>
-  <span style="color:#75715e"># Generates a new user/pwd pair per builds.</span>
-  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
-  <span style="color:#75715e"># - static:</span>
-  <span style="color:#75715e"># Generates a new user/pwd pair only on first build.</span>
-  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
-  <span style="color:#75715e"># - manual:</span>
-  <span style="color:#75715e"># Uses the same user/pwd pair than the one found in the database.credentials_file.</span>
-  <span style="color:#75715e"># This is useful for locked-down setups where you do not have GRANT permissions.</span>
-  <span style="color:#66d9ef">credentials_handling</span>: rotate
-  <span style="color:#66d9ef">databases</span>:
-    - <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_{{ build_type }}&#34;</span>
-      <span style="color:#66d9ef">user</span>: <span style="color:#e6db74">&#34;{{ project_name }}_{{ build_type }}&#34;</span>
-      <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
-
+<span style="color:#66d9ef">api_call</span>:
+  <span style="color:#66d9ef">type</span>: gitlab
+  <span style="color:#66d9ef">base_url</span>: https://gitlab.example.com/api/v4/
+  <span style="color:#66d9ef">path</span>: projects <span style="color:#75715e"># see documentation - https://docs.gitlab.com/ee/api/</span>
+  <span style="color:#66d9ef">method</span>: GET
+  <span style="color:#66d9ef">token</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># empty means anonymous action</span>
+  <span style="color:#66d9ef">token_type</span>: trigger <span style="color:#75715e"># options are &#39;trigger&#39; or &#39;personal&#39;</span>
+  <span style="color:#66d9ef">variables</span>: []
+  <span style="color:#66d9ef">status_codes</span>:
+    - <span style="color:#ae81ff">200</span>
+    - <span style="color:#ae81ff">201</span>
+    - <span style="color:#ae81ff">202</span>
 </code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#mysql-backups">MySQL backups</a>
+    <li><a href="#api-call">API call</a>
       <ul>
         <li><a href="#default-variables">Default variables</a></li>
       </ul>

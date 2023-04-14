@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</guid>
-      <description>   Home   Install   Usage   Roles   Config   Drupal 7   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 7   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Drupal 7 cron   Drupal 8 cron   Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   Init   LHCI run   &amp;ldquo;Meta&amp;rdquo;   Drupal 7   Drupal 8   Matomo   Mautic     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
+      <description>   Home   Install   Usage   Roles   API call   Config   Drupal 7   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 7   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Drupal 7 cron   Drupal 8 cron   Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   Init   LHCI run   &amp;ldquo;Meta&amp;rdquo;   Drupal 7   Drupal 8   Matomo   Mautic   SimpleSAMLphp     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
     </item>
     
     <item>
@@ -55,7 +55,7 @@ Install manually Dependencies The main prerequesites are obviously Ansible and g
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</guid>
       <description>Init These variables must be set in the deploy/common.yml file, at least.
-Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role is mandatory, # this will ensure defaults to other roles too. deploy_user: &amp;#34;deploy&amp;#34; drupal: sites: - folder: &amp;#34;default&amp;#34; public_files: &amp;#34;sites/default/files&amp;#34; # Drupal 8 variables config_sync_directory: &amp;#34;config/sync&amp;#34; config_import_command: &amp;#34;&amp;#34; # i.e. &amp;#34;cim&amp;#34; # End Drupal 8 variables # Drupal 7 variables revert_features_command: &amp;#34;&amp;#34; # i.e. &amp;#34;fra&amp;#34; # End Drupal 7 variables sanitize_command: &amp;#34;sql-sanitize&amp;#34; base_url: https://www.</description>
+Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role is mandatory, # this will ensure defaults to other roles too. # If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable deploy_user: &amp;#34;deploy&amp;#34; _mysqldump_params: &amp;#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&amp;#34; drupal: sites: - folder: &amp;#34;default&amp;#34; public_files: &amp;#34;sites/default/files&amp;#34; # Drupal 8 variables config_sync_directory: &amp;#34;config/sync&amp;#34; config_import_command: &amp;#34;&amp;#34; # i.</description>
     </item>
     
     <item>
@@ -101,6 +101,27 @@ Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role 
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic/</guid>
       <description>Mautic Role for deploying Mautic instances.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</guid>
+      <description>SimpleSAMLphp Role for deploying single SimpleSAMLphp instances. Do not use if you are deploying SimpleSAMLphp with another application like Drupal via composer.
+This role currently assumes all config is in the repository alongside composer.json and the special SIMPLESAMLPHP_CONFIG_DIR variable is passed in via the web server vhost to tell SimpleSAMLphp where the config is on the server. For vhost configuration in Nginx see ce-provision:
+ https://github.com/codeenigma/ce-provision/blob/1.x/roles/nginx  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</guid>
+      <description>API call Making RESTful API calls to other platforms.
+Default variables --- api_call: type: gitlab base_url: https://gitlab.example.com/api/v4/ path: projects # see documentation - https://docs.gitlab.com/ee/api/ method: GET token: &amp;#34;&amp;#34; # empty means anonymous action token_type: trigger # options are &amp;#39;trigger&amp;#39; or &amp;#39;personal&amp;#39; variables: [] status_codes: - 200 - 201 - 202 </description>
     </item>
     
     <item>
@@ -155,7 +176,7 @@ Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role 
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache/</guid>
       <description>Opcache Clear opcache.
-Default variables --- cache_clear_opcache: # Adapter string to use as argument. # eg. # --fcgi=127.0.0.1:9000 # Leave blank to use /etc/cachetool.yml adapter: &amp;#34;&amp;#34; # Bins to clear. clear_opcache: true clear_apcu: false clear_stat: false </description>
+Default variables --- cache_clear_opcache: # Adapter string to use as argument. # eg. # --fcgi=127.0.0.1:9000 # Leave blank to use /etc/cachetool.yml # adapter: &amp;#34;127.0.0.1:9081&amp;#34; # Leave commented to automatically detect the adapter based on PHP version. # Bins to clear. clear_opcache: true clear_apcu: false clear_stat: false # cachetool_bin: &amp;#34;/path/to/cachetool.phar&amp;#34; # see _init for paths if undefined </description>
     </item>
     
     <item>
@@ -194,7 +215,7 @@ Default variables --- ce_dev_prebuild: compose_template: ce-dev.compose.yml comp
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool/</guid>
       <description>Drush Installs the drush command-line tool for the deploy user.
-Default variables --- cachetool: version: 8.2.2 </description>
+Default variables --- cachetool: version: &amp;#34;&amp;#34; # enter three-digit version number, e.g. &amp;#34;7.0.0&amp;#34;, to install a specific version. If not specified, will be installed depending on the php version. </description>
     </item>
     
     <item>
@@ -203,8 +224,9 @@ Default variables --- cachetool: version: 8.2.2 </description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush/</guid>
-      <description>Drush Installs the drush command-line tool for the deploy user.
-Default variables --- drush: # Note: This is the &amp;#34;default&amp;#34; version, # but projects should define theirs in composer.json. version: 8.2.2 use_vendor: false </description>
+      <description>Drush Installs the drush command-line tool for the deploy user. This only works with Drupal 7 and will be withdrawn with Drupal 7 EOL .
+For Drupal 8 and above you must install drush with composer as described in the drush documentation .
+Default variables --- drush: # Where possible always load drush in your Drupal website with composer. version: 8.4.11 use_vendor: false </description>
     </item>
     
     <item>
@@ -288,7 +310,7 @@ Default variables --- config_generate: # Specify any additional symlink to creat
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</guid>
       <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.
-Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&amp;#34; keep: 10 </description>
+Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&amp;#34; keep: 10 mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here </description>
     </item>
     
     <item>
@@ -298,7 +320,7 @@ Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ depl
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</guid>
       <description>Drupal 7 cron Ensure Drupal cron entries are run.
-Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 job: cron # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
     </item>
     
     <item>
@@ -308,7 +330,7 @@ Default variables --- # This role takes its parameters from the &amp;#34;drupal.
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</guid>
       <description>Drupal 8 cron Ensure Drupal cron entries are run.
-Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 job: cron # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
     </item>
     
     <item>
@@ -338,7 +360,7 @@ Default variables --- cron_mautic: entries: - minute: &amp;#34;*/{{ 10 | random(
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/</guid>
       <description>Data backups Generate backups for each build.
-Default variables --- database_backup: engines: - mysql </description>
+Default variables --- database_backup: engines: - mysql revert: true </description>
     </item>
     
     <item>
@@ -348,7 +370,7 @@ Default variables --- database_backup: engines: - mysql </description>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql/</guid>
       <description>MySQL backups Generate MySQL backups for each build.
-Default variables --- mysql_backup: handling: rolling dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&amp;#34; # Number of dumps/db to keep. Note this is independant from the build codebases. keep: 10 # This can be one of the following: # - rotate: # Generates a new user/pwd pair per builds. # This require that the credentials passed as database.credentials_file have GRANT permissions. # - static: # Generates a new user/pwd pair only on first build.</description>
+Default variables --- mysql_backup: handling: rolling dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&amp;#34; mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here # Number of dumps/db to keep. Note this is independant from the build codebases. keep: 10 # This can be one of the following: # - rotate: # Generates a new user/pwd pair per builds. # This require that the credentials passed as database.</description>
     </item>
     
     <item>
@@ -357,8 +379,8 @@ Default variables --- mysql_backup: handling: rolling dumps_directory: &amp;#34;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</guid>
-      <description>Deploy Step that deploys the codebase.
-Default variables --- deploy_code: # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # create: wether to create the target if it does not exists. # - src: &amp;#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; # - src: &amp;#39;/var/simplesaml/etc&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; symlinks: [] # Specify any additional templates to generate, with src (template) and dest (file).</description>
+      <description>Deploy Step that deploys the codebase. On standalone machines and &amp;ldquo;static&amp;rdquo; clusters of web servers (e.g. machines whose addressing never changes) this is reasonably straightforward, the default variables should &amp;ldquo;just work&amp;rdquo;. This role also supports deployment to autoscaling clusters of web servers, such as AWS autoscaling groups or containerised architecture. More details on that after this section.
+The shell script that wraps Ansible to handle the various build steps has various &amp;ldquo;stages&amp;rdquo; and the deploy_code role has a set of tasks for each stage.</description>
     </item>
     
     <item>
@@ -419,7 +441,7 @@ Default variables --- database_sync: engines: - mysql </description>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</guid>
       <description>Database sync - MySQL Sync MySQL databases between environments.
-Default variables --- mysql_sync: databases: - source: # Name of the database to take a dump from. database: &amp;#34;{{ project_name }}_prod&amp;#34; # Host that can connect to the database. host: &amp;#34;localhost&amp;#34; # Creds file on the host. credentials_file: &amp;#34;/home/{{ deploy_user }}/.mysql.creds&amp;#34; # This can be of types: # - rolling: (database backups). In that case we&amp;#39;ll need build parameters.@todo # - fixed: &amp;#34;fixed&amp;#34; database name # - dump: Use an existing dump.</description>
+Default variables --- mysql_sync: mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here databases: - source: # Name of the database to take a dump from. database: &amp;#34;{{ project_name }}_prod&amp;#34; # Host that can connect to the database. host: &amp;#34;localhost&amp;#34; # Creds file on the host. credentials_file: &amp;#34;/home/{{ deploy_user }}/.mysql.creds&amp;#34; # This can be of types: # - rolling: (database backups).</description>
     </item>
     
     <item>

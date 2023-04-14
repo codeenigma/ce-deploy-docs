@@ -19,11 +19,12 @@
   <span style="color:#75715e"># eg.</span>
   <span style="color:#75715e"># --fcgi=127.0.0.1:9000</span>
   <span style="color:#75715e"># Leave blank to use /etc/cachetool.yml</span>
-  <span style="color:#66d9ef">adapter</span>: <span style="color:#e6db74">&#34;&#34;</span>
+  <span style="color:#75715e"># adapter: &#34;127.0.0.1:9081&#34; # Leave commented to automatically detect the adapter based on PHP version.</span>
   <span style="color:#75715e"># Bins to clear.</span>
   <span style="color:#66d9ef">clear_opcache</span>: <span style="color:#66d9ef">true</span>
   <span style="color:#66d9ef">clear_apcu</span>: <span style="color:#66d9ef">false</span>
   <span style="color:#66d9ef">clear_stat</span>: <span style="color:#66d9ef">false</span>
+  <span style="color:#75715e"># cachetool_bin: &#34;/path/to/cachetool.phar&#34; # see _init for paths if undefined</span>
 
 </code></pre></div><!-- raw HTML omitted -->
 
@@ -47,6 +48,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
 <li><a href="roles">Roles</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
@@ -103,6 +105,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>

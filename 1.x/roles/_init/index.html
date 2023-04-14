@@ -16,14 +16,16 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 <span style="color:#75715e"># Common defaults. Given the &#34;_init&#34; role is mandatory,</span>
 <span style="color:#75715e"># this will ensure defaults to other roles too.</span>
+<span style="color:#75715e"># If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable</span>
 <span style="color:#66d9ef">deploy_user</span>: <span style="color:#e6db74">&#34;deploy&#34;</span>
+<span style="color:#66d9ef">_mysqldump_params</span>: <span style="color:#e6db74">&#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&#34;</span>
 <span style="color:#66d9ef">drupal</span>:
   <span style="color:#66d9ef">sites</span>:
     - <span style="color:#66d9ef">folder</span>: <span style="color:#e6db74">&#34;default&#34;</span>
       <span style="color:#66d9ef">public_files</span>: <span style="color:#e6db74">&#34;sites/default/files&#34;</span>
       <span style="color:#75715e"># Drupal 8 variables</span>
       <span style="color:#66d9ef">config_sync_directory</span>: <span style="color:#e6db74">&#34;config/sync&#34;</span>
-      <span style="color:#66d9ef">config_import_command</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># i.e. &#34;cim&#34;</span>
+      <span style="color:#66d9ef">config_import_command</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># i.e. &#34;cim&#34; - set this to &#34;deploy&#34; and cache rebuild and db updates will be skipped</span>
       <span style="color:#75715e"># End Drupal 8 variables</span>
       <span style="color:#75715e"># Drupal 7 variables</span>
       <span style="color:#66d9ef">revert_features_command</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># i.e. &#34;fra&#34;</span>
@@ -38,7 +40,7 @@
 <span style="color:#66d9ef">mautic</span>:
   <span style="color:#66d9ef">image_path</span>: <span style="color:#e6db74">&#34;media/images&#34;</span>
   <span style="color:#66d9ef">force_install</span>: <span style="color:#66d9ef">false</span>
-
+<span style="color:#66d9ef">bin_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.bin&#34;</span>
 </code></pre></div><!-- raw HTML omitted -->
 
     </article>
@@ -61,6 +63,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
 <li><a href="roles">Roles</a>
 <ul>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
 <ul>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
@@ -117,6 +120,7 @@
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>

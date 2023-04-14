@@ -52,6 +52,14 @@
   </url>
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</loc>
+  </url>
+  
+  <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</loc>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</loc>
   </url>
   
