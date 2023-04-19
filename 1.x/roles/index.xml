@@ -17,7 +17,7 @@
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</guid>
       <description>Init These variables must be set in the deploy/common.yml file, at least.
-Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role is mandatory, # this will ensure defaults to other roles too. # If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable deploy_user: &amp;#34;deploy&amp;#34; _mysqldump_params: &amp;#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&amp;#34; drupal: sites: - folder: &amp;#34;default&amp;#34; public_files: &amp;#34;sites/default/files&amp;#34; # Drupal 8 variables config_sync_directory: &amp;#34;config/sync&amp;#34; config_import_command: &amp;#34;&amp;#34; # i.</description>
+Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role is mandatory, # this will ensure defaults to other roles too. # If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable deploy_user: &amp;#34;deploy&amp;#34; # for MySQL CE you might want to add &amp;#39;--set-gtid-purged=OFF --skip-definer&amp;#39; here _mysqldump_params: &amp;#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&amp;#34; drupal: sites: - folder: &amp;#34;default&amp;#34; public_files: &amp;#34;sites/default/files&amp;#34; # Drupal 8 variables config_sync_directory: &amp;#34;config/sync&amp;#34; config_import_command: &amp;#34;&amp;#34; # i.</description>
     </item>
     
     <item>

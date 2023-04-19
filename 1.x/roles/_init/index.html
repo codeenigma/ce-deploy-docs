@@ -18,6 +18,7 @@
 <span style="color:#75715e"># this will ensure defaults to other roles too.</span>
 <span style="color:#75715e"># If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable</span>
 <span style="color:#66d9ef">deploy_user</span>: <span style="color:#e6db74">&#34;deploy&#34;</span>
+<span style="color:#75715e"># for MySQL CE you might want to add &#39;--set-gtid-purged=OFF --skip-definer&#39; here</span>
 <span style="color:#66d9ef">_mysqldump_params</span>: <span style="color:#e6db74">&#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&#34;</span>
 <span style="color:#66d9ef">drupal</span>:
   <span style="color:#66d9ef">sites</span>:
@@ -29,6 +30,7 @@
       <span style="color:#75715e"># End Drupal 8 variables</span>
       <span style="color:#75715e"># Drupal 7 variables</span>
       <span style="color:#66d9ef">revert_features_command</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># i.e. &#34;fra&#34;</span>
+      <span style="color:#66d9ef">revert_ctools_command</span>: <span style="color:#e6db74">&#34;ctools-export-revert --all&#34;</span>
       <span style="color:#75715e"># End Drupal 7 variables</span>
       <span style="color:#66d9ef">sanitize_command</span>: <span style="color:#e6db74">&#34;sql-sanitize&#34;</span>
       <span style="color:#66d9ef">base_url</span>: https://www.example.com
@@ -41,6 +43,9 @@
   <span style="color:#66d9ef">image_path</span>: <span style="color:#e6db74">&#34;media/images&#34;</span>
   <span style="color:#66d9ef">force_install</span>: <span style="color:#66d9ef">false</span>
 <span style="color:#66d9ef">bin_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.bin&#34;</span>
+<span style="color:#75715e"># Number of dumps/db to look up for cleanup.</span>
+<span style="color:#66d9ef">cleanup_history_depth</span>: <span style="color:#ae81ff">50</span>
+
 </code></pre></div><!-- raw HTML omitted -->
 
     </article>
