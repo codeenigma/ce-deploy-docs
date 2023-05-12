@@ -441,7 +441,7 @@ Default variables --- database_sync: engines: - mysql </description>
       
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</guid>
       <description>Database sync - MySQL Sync MySQL databases between environments.
-Default variables --- mysql_sync: mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here databases: - source: # Name of the database to take a dump from. database: &amp;#34;{{ project_name }}_prod&amp;#34; # Host that can connect to the database. host: &amp;#34;localhost&amp;#34; # Creds file on the host. credentials_file: &amp;#34;/home/{{ deploy_user }}/.mysql.creds&amp;#34; # This can be of types: # - rolling: (database backups).</description>
+Default variables --- mysql_sync: mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here cleanup: true # if false leaves tmp database dump on deploy server for debugging purposes databases: - source: # Name of the database to take a dump from. database: &amp;#34;{{ project_name }}_prod&amp;#34; # Host that can connect to the database. host: &amp;#34;localhost&amp;#34; # Creds file on the host.</description>
     </item>
     
     <item>
