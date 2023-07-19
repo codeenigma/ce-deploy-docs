@@ -13,8 +13,9 @@
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 <span style="color:#66d9ef">mysql_sync</span>:
-  <span style="color:#66d9ef">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here</span>
-  <span style="color:#66d9ef">cleanup</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># if false leaves tmp database dump on deploy server for debugging purposes</span>
+  <span style="color:#66d9ef">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here.</span>
+  <span style="color:#66d9ef">cleanup</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># if false leaves tmp database dump on deploy server for debugging purposes.</span>
+  <span style="color:#66d9ef">archival_method</span>: <span style="color:#e6db74">&#34;bzip2&#34;</span> <span style="color:#75715e"># oprions are &#34;bzip2&#34; or &#34;gzip&#34;.</span>
   <span style="color:#66d9ef">databases</span>:
     - <span style="color:#66d9ef">source</span>:
         <span style="color:#75715e"># Name of the database to take a dump from.</span>
@@ -123,6 +124,7 @@
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container">Deploy container</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run">LHCI run</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>

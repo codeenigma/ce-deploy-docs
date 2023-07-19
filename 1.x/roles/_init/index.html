@@ -21,6 +21,7 @@
 <span style="color:#75715e"># for MySQL CE you might want to add &#39;--set-gtid-purged=OFF --skip-definer&#39; here</span>
 <span style="color:#66d9ef">_mysqldump_params</span>: <span style="color:#e6db74">&#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&#34;</span>
 <span style="color:#66d9ef">drupal</span>:
+  <span style="color:#66d9ef">drush_verbose_output</span>: <span style="color:#66d9ef">false</span>
   <span style="color:#66d9ef">sites</span>:
     - <span style="color:#66d9ef">folder</span>: <span style="color:#e6db74">&#34;default&#34;</span>
       <span style="color:#66d9ef">public_files</span>: <span style="color:#e6db74">&#34;sites/default/files&#34;</span>
@@ -118,6 +119,7 @@
 </ul>
 </li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
+<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container">Deploy container</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run">LHCI run</a></li>
 <li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>

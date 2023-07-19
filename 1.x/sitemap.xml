@@ -168,6 +168,10 @@
   </url>
   
   <url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container/</loc>
+  </url>
+  
+  <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run/</loc>
   </url>
   
