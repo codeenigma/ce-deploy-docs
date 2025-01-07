@@ -5,53 +5,63 @@
   <title>ce-deploy</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1">
   
-  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
+  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.a5be948f3ce84fca7dc597e47b7bb98101cec76fa354cce27baa38078b559a24.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
         <h1 id="database-sync---mysql">Database sync - MySQL</h1>
 <p>Sync MySQL databases between environments.</p>
+<p>In order to manipulate an AWS Autoscaling Group (ASG) your <code>deploy</code> user must have an AWS CLI profile for a user with the following IAM permissions:</p>
+<ul>
+<li><code>autoscaling:ResumeProcesses</code></li>
+<li><code>autoscaling:SuspendProcesses</code></li>
+<li><code>autoscaling:DescribeScalingProcessTypes</code></li>
+<li><code>autoscaling:DescribeAutoScalingGroups</code></li>
+</ul>
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">mysql_sync</span>:
-  <span style="color:#66d9ef">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here.</span>
-  <span style="color:#66d9ef">cleanup</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># if false leaves tmp database dump on deploy server for debugging purposes.</span>
-  <span style="color:#66d9ef">archival_method</span>: <span style="color:#e6db74">&#34;bzip2&#34;</span> <span style="color:#75715e"># oprions are &#34;bzip2&#34; or &#34;gzip&#34;.</span>
-  <span style="color:#66d9ef">databases</span>:
-    - <span style="color:#66d9ef">source</span>:
-        <span style="color:#75715e"># Name of the database to take a dump from.</span>
-        <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_prod&#34;</span>
-        <span style="color:#75715e"># Host that can connect to the database.</span>
-        <span style="color:#66d9ef">host</span>: <span style="color:#e6db74">&#34;localhost&#34;</span>
-        <span style="color:#75715e"># Creds file on the host.</span>
-        <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
-        <span style="color:#75715e"># This can be of types:</span>
-        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.@todo</span>
-        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
-        <span style="color:#75715e"># - dump: Use an existing dump. In that case, the &#34;database&#34; variable is the absolute file path.</span>
-        <span style="color:#66d9ef">type</span>: fixed
-        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
-        <span style="color:#66d9ef">build_id</span>: mybuildprod
-        <span style="color:#75715e"># Whether or not use to create a fresh database backup or use a nightly one.</span>
-        <span style="color:#66d9ef">fresh_db</span>: <span style="color:#66d9ef">true</span>
-        <span style="color:#75715e"># Location where nightly backups are kept. This must match the value set for cron_mysql_backup.dumps_directory. Below is the default.</span>
-        <span style="color:#75715e"># This var is only used when fresh_db is set to &#34;false&#34;.</span>
-        <span style="color:#66d9ef">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&#34;</span>
-        <span style="color:#75715e"># If the source is on an ASG, provide the ASG name here. Otherwise, leave empty.</span>
-        <span style="color:#66d9ef">asg</span>: <span style="color:#e6db74">&#34;&#34;</span>
-      <span style="color:#66d9ef">target</span>:
-        <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_dev&#34;</span>
-        <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
-        <span style="color:#75715e"># This can be of types:</span>
-        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.</span>
-        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
-        <span style="color:#75715e"># - dump: Creates a dump file on the target server. In that case, the &#34;database&#34; variable is the absolute file path.</span>
-        <span style="color:#66d9ef">type</span>: fixed
-        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
-        <span style="color:#66d9ef">build_id</span>: mybuilddev
-        <span style="color:#75715e"># If the target is on an ASG, provide the ASG name here. Otherwise, leave empty.</span>
-        <span style="color:#66d9ef">asg</span>: <span style="color:#e6db74">&#34;&#34;</span>
-
-</code></pre></div><!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">mysql_sync</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">cleanup</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># if false leaves tmp database dump on deploy server for debugging purposes.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">archival_method</span>: <span style="color:#e6db74">&#34;gzip&#34;</span> <span style="color:#75715e"># oprions are &#34;bzip2&#34; or &#34;gzip&#34;.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">databases</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">source</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Name of the database to take a dump from.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_prod&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Host that can connect to the database.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">host</span>: <span style="color:#e6db74">&#34;localhost&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Creds file on the host.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This can be of types:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.@todo</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name # currently this var means the same as &#34;dump&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - dump: Use an existing dump. In that case, the &#34;database&#34; variable is the absolute file path.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This parameter is ignored if var &#39;path_on_deploy_server&#39; is defined.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">fixed</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">build_id</span>: <span style="color:#ae81ff">mybuildprod</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Whether or not use to create a fresh database backup or use a nightly one.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">fresh_db</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Location where nightly backups are kept. This must match the value set for cron_mysql_backup.dumps_directory. Below is the default.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This var is only used when fresh_db is set to &#34;false&#34;.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># If the source is on an ASG, provide the ASG name here. Otherwise, leave empty.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">asg</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Uncomment and specify full path if you want to use your own dump file on the deploy server (gzip compressed).</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># In this case it&#39;s the only variable you need in &#39;database.source&#39;.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">#path_on_deploy_server: &#34;/home/{{ deploy_user }}/compressed_database_dump.gz&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">target</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_dev&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># This can be of types:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - rolling: (database backups). In that case we&#39;ll need build parameters.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - fixed: &#34;fixed&#34; database name</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># - dump: Creates a dump file on the target server. In that case, the &#34;database&#34; variable is the absolute file path.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">fixed</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># For &#34;rolling builds&#34;, so we can compute the database name.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">build_id</span>: <span style="color:#ae81ff">mybuilddev</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># If the target is on an ASG, provide the ASG name here. Otherwise, leave empty.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">asg</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 
@@ -69,89 +79,187 @@
     </aside><aside class="menu">
 <p> </p>
 <ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/">Home</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install">Install</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
-<li><a href="roles">Roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache">Opcache</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev">ce-dev</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli">CLI Tools</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool">Drush</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush">Drush</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron">Cron</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup">Database backup cron task</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7">Drupal 7 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8">Drupal 8 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup">Data backups</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql">MySQL backups</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container">Deploy container</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run">LHCI run</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync">Sync roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync">Database sync</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/" >Home</a>
 
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install" >Install</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts" >Usage</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles" >Roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call" >API call</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache" >Opcache</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony" >Symfony</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev" >ce-dev</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild" >ce-dev prebuild</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli" >CLI Tools</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool" >Drush</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush" >Drush</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer" >Composer</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic" >Mautic</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron" >Cron</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup" >Database backup cron task</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql" >Database backup cron task - MySQL</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7" >Drupal 7 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8" >Drupal 8 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo" >Database backup cron task - MySQL</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic" >Mautic cron tasks</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup" >Data backups</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql" >MySQL backups</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code" >Deploy</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container" >Deploy container</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit" >Exit</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init" >Init</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run" >LHCI run</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode" >Maintenance Mode</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta" >&ldquo;Meta&rdquo;</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10" >Drupal 10</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic" >Mautic</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp" >SimpleSAMLphp</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm" >NPM</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync" >Sync roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync" >Database sync</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql" >Database sync - MySQL</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </aside>
     </body>
 </html>

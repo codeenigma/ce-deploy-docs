@@ -5,7 +5,7 @@
   <title>ce-deploy</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1">
   
-  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
+  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.a5be948f3ce84fca7dc597e47b7bb98101cec76fa354cce27baa38078b559a24.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
         <h1 id="deploy">Deploy</h1>
 <p>Step that deploys the codebase. On standalone machines and &ldquo;static&rdquo; clusters of web servers (e.g. machines whose addressing never changes) this is reasonably straightforward, the default variables should &ldquo;just work&rdquo;. This role also supports deployment to autoscaling clusters of web servers, such as AWS autoscaling groups or containerised architecture. More details on that after this section.</p>
@@ -26,7 +26,7 @@
 <p>For autoscaling clusters - no matter the underlying tech - the build code needs to be stored somewhere central and accessible to any potential new servers in the cluster. Because the performance of network attached storage (NAS) is often too poor or unreliable, we do not deploy the code to NAS - although this would be the simplest approach. Instead the technique we use is to build the code on each current server in the cluster, as though it were a static cluster or standalone machine, but <em>also</em> copy the code to the NAS so it is available to all future machines. This makes the existence of mounted NAS that is attached to all new servers a pre-requisite for <code>ce-deploy</code> to work with autoscaling.</p>
 <p><strong>Important</strong>, autoscale deployments need to be carefully co-ordinated with 
 <a href="https://github.com/codeenigma/ce-provision/tree/1.x/roles/mount_sync"  target="_blank" rel="noopener">the <code>mount_sync</code> role in <code>ce-provision</code></a>
- so new servers/containers have the correct scripts in place to place their code after they initialise. Specifically, the <code>mount_sync.tarballs</code> or <code>mount_sync.squashed_fs</code> list variables in <code>ce-provision</code> must contain paths that match with the location specified in the <code>deploy_code.mount_sync</code> variable in <code>ce-deploy</code> so <code>ce-deploy</code> copies code to the place <code>ce-provision</code>'s <code>cloud-init</code> scripts expect to find it. (More on the use of <code>cloud-init</code> below.)</p>
+ so new servers/containers have the correct scripts in place to place their code after they initialise. Specifically, the <code>mount_sync.tarballs</code> or <code>mount_sync.squashed_fs</code> list variables in <code>ce-provision</code> must contain paths that match with the location specified in the <code>deploy_code.mount_sync</code> variable in <code>ce-deploy</code> so <code>ce-deploy</code> copies code to the place <code>ce-provision</code>&rsquo;s <code>cloud-init</code> scripts expect to find it. (More on the use of <code>cloud-init</code> below.)</p>
 <p>(An aside, we have previously supported S3-like object storage for storing the built code, but given all the applications we work with need to have NAS anyway for end user file uploads and other shared cluster resources, it seems pointless to introduce a second storage mechanism when we have one there already that works just fine.)</p>
 <p>This packaging of a copy of the code all happens in 
 <a href="https://github.com/codeenigma/ce-deploy/blob/1.x/roles/deploy_code/tasks/cleanup.yml"  target="_blank" rel="noopener">the <code>cleanup.yml</code> file of the role</a>
@@ -56,20 +56,20 @@
 <a href="https://github.com/codeenigma/ce-provision/tree/1.x/roles/squashfs"  target="_blank" rel="noopener">the <code>squashfs</code> role in <code>ce-provision</code></a>
 .</p>
 <p>Consequently, at the build stage there are two important extra variables to set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">deploy_code</span>:
-  <span style="color:#75715e"># List of services to manipulate to free the loop device for &#39;squashfs&#39; builds, post lazy umount.</span>
-  <span style="color:#75715e"># @see the squashfs role in ce-provision where special permissions for deploy user to manipulate services get granted.</span>
-  <span style="color:#66d9ef">services</span>: []
-  <span style="color:#75715e"># services:</span>
-  <span style="color:#75715e">#   - php8.0-fpm</span>
-  <span style="color:#75715e"># What action to take against the services, &#39;reload&#39; or &#39;stop&#39;.</span>
-  <span style="color:#75715e"># Busy websites will require a hard stop of services to achieve the umount command.</span>
-  <span style="color:#66d9ef">service_action</span>: reload
-</code></pre></div><p><code>services</code> is a list of Linux services to stop/reload in order to ensure the mount point is not locked. Usually this will be your PHP service, e.g.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">deploy_code</span>:
-  <span style="color:#66d9ef">services</span>:
-    - php8<span style="color:#ae81ff">.1</span>-fpm
-</code></pre></div><p><code>service_action</code> is whether <code>ce-deploy</code> should restart the services in the list of stop them, unmount and remount the image and start them again. The latter is the only &ldquo;safe&rdquo; way to deploy, but results in a second or two of down time.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">deploy_code</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># List of services to manipulate to free the loop device for &#39;squashfs&#39; builds, post lazy umount.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @see the squashfs role in ce-provision where special permissions for deploy user to manipulate services get granted.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">services</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># services:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   - php8.0-fpm</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># What action to take against the services, &#39;reload&#39; or &#39;stop&#39;.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Busy websites will require a hard stop of services to achieve the umount command.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">service_action</span>: <span style="color:#ae81ff">reload</span>
+</span></span></code></pre></div><p><code>services</code> is a list of Linux services to stop/reload in order to ensure the mount point is not locked. Usually this will be your PHP service, e.g.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">deploy_code</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">services</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">php8.1-fpm</span>
+</span></span></code></pre></div><p><code>service_action</code> is whether <code>ce-deploy</code> should restart the services in the list of stop them, unmount and remount the image and start them again. The latter is the only &ldquo;safe&rdquo; way to deploy, but results in a second or two of down time.</p>
 <p>Finally, as with the <code>tarball</code> method, the packed image is copied up to the NAS to be available to all future servers and is named <code>PROJECTNAME_BUILDTYPE_deploy.sqsh</code>. 
 <a href="https://github.com/codeenigma/ce-deploy/blob/1.x/roles/deploy_code/tasks/cleanup.yml#L80"  target="_blank" rel="noopener">See the code here.</a>
  The previous codebase is <em>also</em> packed and copied to the NAS, named <code>PROJECTNAME_BUILDTYPE_deploy_previous.sqsh</code> in the same directory.</p>
@@ -107,64 +107,75 @@
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">deploy_code</span>:
-  <span style="color:#75715e"># Specify any additional symlink to create, with src (target) and dest (link).</span>
-  <span style="color:#75715e"># src: can be either absolute or relative to the dest (eg. &#39;/var/my_data&#39;, &#39;/home/deploy/simplesaml&#39;, &#39;../../../myconfig&#39;)</span>
-  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/themes/myassets&#39;, &#39;var/cache&#39;)</span>
-  <span style="color:#75715e"># create: whether to create the target if it does not exists.</span>
-  <span style="color:#75715e">#  - src: &#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&#39;</span>
-  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
-  <span style="color:#75715e">#  - src: &#39;/var/simplesaml/etc&#39;</span>
-  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
-  <span style="color:#66d9ef">symlinks</span>: []
-  <span style="color:#75715e"># Specify any additional templates to generate, with src (template) and dest (file).</span>
-  <span style="color:#75715e"># src: name of a template, in the &#34;templates&#34; dir relative to your playbook.</span>
-  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/config.php&#39;, &#39;var/mysettings.php&#39;)</span>
-  <span style="color:#66d9ef">templates</span>: []
-  <span style="color:#75715e"># Number of builds to keep. Note this is independant of databases/dump.</span>
-  <span style="color:#66d9ef">keep</span>: <span style="color:#ae81ff">10</span>
-  <span style="color:#75715e"># Whether to sync the local deploy base to a shared destination, after successful build.</span>
-  <span style="color:#66d9ef">mount_sync</span>: <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># mount_sync: &#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/deploy&#34;</span>
-  <span style="color:#75715e"># Type of file to use for sync - &#39;squashfs&#39; or &#39;tarball&#39;</span>
-  <span style="color:#75715e"># @see the _init role for SquashFS build dir paths</span>
-  <span style="color:#75715e"># @see the squashfs role in ce-provision which installs the special conditions required by the deploy user to use this behaviour</span>
-  <span style="color:#66d9ef">mount_type</span>: <span style="color:#e6db74">&#34;tarball&#34;</span>
-  <span style="color:#75715e"># Path that you want to make sure has 755 permissions. Make sure to include the webroot WITHOUT the slash.</span>
-  <span style="color:#66d9ef">perms_fix_path</span>: <span style="color:#e6db74">&#34;&#34;</span>
-  <span style="color:#75715e"># perms_fix_path: &#34;www/sites/default&#34;</span>
-  <span style="color:#75715e"># List of services to manipulate to free the loop device for &#39;squashfs&#39; builds, post lazy umount.</span>
-  <span style="color:#75715e"># @see the squashfs role in ce-provision where special permissions for deploy user to manipulate services get granted.</span>
-  <span style="color:#66d9ef">services</span>: []
-  <span style="color:#75715e"># services:</span>
-  <span style="color:#75715e">#   - php8.0-fpm</span>
-  <span style="color:#75715e"># What action to take against the services, &#39;reload&#39; or &#39;stop&#39;.</span>
-  <span style="color:#75715e"># Busy websites will require a hard stop of services to achieve the umount command.</span>
-  <span style="color:#66d9ef">service_action</span>: reload
-  <span style="color:#75715e"># Trigger an API call to rebuild infra after a deploy, e.g. if you need to repack an AMI.</span>
-  <span style="color:#66d9ef">rebuild_infra</span>: <span style="color:#66d9ef">false</span>
-  <span style="color:#75715e"># Details of API call to trigger. See api_call role.</span>
-  <span style="color:#66d9ef">api_call</span>:
-    <span style="color:#66d9ef">type</span>: gitlab
-    <span style="color:#66d9ef">base_url</span>: https://gitlab.example.com/api/v4/
-    <span style="color:#66d9ef">path</span>: projects/<span style="color:#ae81ff">1</span>/ref/main/trigger/pipeline
-    <span style="color:#66d9ef">method</span>: POST
-    <span style="color:#66d9ef">token</span>: asdf<span style="color:#ae81ff">-1234</span>
-    <span style="color:#66d9ef">token_type</span>: trigger
-    <span style="color:#66d9ef">variables</span>: []
-    <span style="color:#75715e"># example build parameters</span>
-    <span style="color:#75715e">#  - &#34;[ENV]=dev&#34;</span>
-    <span style="color:#75715e">#  - &#34;[PLAY]=myserver.yml&#34;</span>
-    <span style="color:#75715e">#  - &#34;[RESOURCE]=myserver-example-com&#34;</span>
-    <span style="color:#75715e">#  - &#34;[REGION]=eu-west-1&#34;</span>
-    <span style="color:#75715e">#  - &#34;[EXTRA_PARAMS]=--force&#34;</span>
-    <span style="color:#66d9ef">status_codes</span>:
-      - <span style="color:#ae81ff">200</span>
-      - <span style="color:#ae81ff">201</span>
-      - <span style="color:#ae81ff">202</span>
-
-</code></pre></div><!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Required for NGINX config in feature branching.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">_ce_provision_data_dir</span>: <span style="color:#ae81ff">/home/deploy/ce-deploy/data</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">deploy_code</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Feature branching config.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">feature_branch</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># NGINX domains to build, see ce-provision for docs: https://github.com/codeenigma/ce-provision/blob/2.x/roles/debian/nginx/defaults/main.yml#L133</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">domains</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Specify any additional symlink to create, with src (target) and dest (link).</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># src: can be either absolute or relative to the dest (eg. &#39;/var/my_data&#39;, &#39;/home/deploy/simplesaml&#39;, &#39;../../../myconfig&#39;)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/themes/myassets&#39;, &#39;var/cache&#39;)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># force: set to true to create the symlinks in two cases: the source file does not exist but will appear later; the destination exists and is a file.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#  - src: &#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    force: true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#  - src: &#39;/var/simplesaml/etc&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    dest: &#39;vendor/simplesamlphp/simplesamlphp/config&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#    force: false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">symlinks</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Specify any additional templates to generate, with src (template) and dest (file).</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># src: name of a template, in the &#34;templates&#34; dir relative to your playbook.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/config.php&#39;, &#39;var/mysettings.php&#39;)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">templates</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Number of builds to keep. Note this is independant of databases/dump.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">keep</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Whether to sync the local deploy base to a shared destination, after successful build.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mount_sync</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># mount_sync: &#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/deploy&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Type of file to use for sync - &#39;squashfs&#39; or &#39;tarball&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @see the _init role for SquashFS build dir paths</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @see the squashfs role in ce-provision which installs the special conditions required by the deploy user to use this behaviour</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mount_type</span>: <span style="color:#e6db74">&#34;tarball&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Path that you want to make sure has 755 permissions. Make sure to include the webroot WITHOUT the slash.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">perms_fix_path</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># perms_fix_path: &#34;www/sites/default&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># List of services to manipulate to free the loop device for &#39;squashfs&#39; builds, post lazy umount.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @see the squashfs role in ce-provision where special permissions for deploy user to manipulate services get granted.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">services</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># services:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#   - php8.0-fpm</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># What action to take against the services, &#39;reload&#39; or &#39;stop&#39;.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Busy websites will require a hard stop of services to achieve the umount command.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">service_action</span>: <span style="color:#ae81ff">reload</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Trigger an API call to rebuild infra after a deploy, e.g. if you need to repack an AMI.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rebuild_infra</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Used to skip tasks to fix ownership and permissions, drupal needs this set to true by default</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fix_cleanup_perms</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Details of API call to trigger. See api_call role.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">api_call</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">type</span>: <span style="color:#ae81ff">gitlab</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">base_url</span>: <span style="color:#ae81ff">https://gitlab.example.com/api/v4/</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">path</span>: <span style="color:#ae81ff">projects/1/ref/main/trigger/pipeline</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">method</span>: <span style="color:#ae81ff">POST</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">token</span>: <span style="color:#ae81ff">asdf-1234</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">token_type</span>: <span style="color:#ae81ff">trigger</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">variables</span>: []
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># example build parameters</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  - &#34;[ENV]=dev&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  - &#34;[PLAY]=myserver.yml&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  - &#34;[RESOURCE]=myserver-example-com&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  - &#34;[REGION]=eu-west-1&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#  - &#34;[EXTRA_PARAMS]=--force&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">status_codes</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">201</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">202</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
 
     </article>
     <aside>
@@ -196,89 +207,187 @@
     </aside><aside class="menu">
 <p> </p>
 <ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/">Home</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install">Install</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
-<li><a href="roles">Roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache">Opcache</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev">ce-dev</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli">CLI Tools</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool">Drush</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush">Drush</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron">Cron</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup">Database backup cron task</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7">Drupal 7 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8">Drupal 8 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup">Data backups</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql">MySQL backups</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container">Deploy container</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run">LHCI run</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync">Sync roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync">Database sync</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/" >Home</a>
 
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install" >Install</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts" >Usage</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles" >Roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call" >API call</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache" >Opcache</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony" >Symfony</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev" >ce-dev</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild" >ce-dev prebuild</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli" >CLI Tools</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool" >Drush</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush" >Drush</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer" >Composer</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic" >Mautic</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron" >Cron</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup" >Database backup cron task</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql" >Database backup cron task - MySQL</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7" >Drupal 7 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8" >Drupal 8 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo" >Database backup cron task - MySQL</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic" >Mautic cron tasks</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup" >Data backups</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql" >MySQL backups</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code" >Deploy</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container" >Deploy container</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit" >Exit</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init" >Init</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run" >LHCI run</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode" >Maintenance Mode</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta" >&ldquo;Meta&rdquo;</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10" >Drupal 10</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic" >Mautic</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp" >SimpleSAMLphp</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm" >NPM</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync" >Sync roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync" >Database sync</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql" >Database sync - MySQL</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </aside>
     </body>
 </html>

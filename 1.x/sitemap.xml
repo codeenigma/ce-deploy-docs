@@ -1,215 +1,113 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit/</loc>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/</loc>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10/</loc>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo/</loc>
-  </url>
-  
-  <url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache/</loc>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony/</loc>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run/</loc>
-  </url>
-  
-  <url>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode/</loc>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sanitize/admin_creds/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/tags/</loc>
   </url>
-  
 </urlset>

@@ -5,36 +5,50 @@
   <title>ce-deploy</title>
   <meta name="viewport" content="width=device-width,minimum-scale=1">
   
-  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.9c98165d1dd1f18e44902c88197986b800a6f81dad436c40e50a55817cd0f131.css">
+  <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.a5be948f3ce84fca7dc597e47b7bb98101cec76fa354cce27baa38078b559a24.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
         <h1 id="mysql-backups">MySQL backups</h1>
 <p>Generate MySQL backups for each build.</p>
-<!-- raw HTML omitted -->
+<h2 id="replicas">Replicas</h2>
+<p>If you are using a read only replica in your application and you need to add it to <code>databases</code> in order to have access to the credentials for your app settings, be sure to set the database up in a similar way to this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">mysql_backup</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">databases</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#34;{{ (project_name + &#39;_&#39; + build_type) | regex_replace(&#39;-&#39;, &#39;_&#39;) }}&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">user</span>: <span style="color:#e6db74">&#34;{{ (project_name + &#39;_&#39; + build_type) | truncate(32, true, &#39;&#39;, 0) }}&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">handling</span>: <span style="color:#ae81ff">none</span> <span style="color:#75715e"># prevents the replica from being backed up</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">is_replica</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># tells ce-deploy we are working with a replica, so it will implement a pause</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
 <h2 id="default-variables">Default variables</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
-<span style="color:#66d9ef">mysql_backup</span>:
-  <span style="color:#66d9ef">handling</span>: rolling
-  <span style="color:#66d9ef">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&#34;</span>
-  <span style="color:#66d9ef">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here</span>
-  <span style="color:#75715e"># Number of dumps/db to keep. Note this is independant from the build codebases.</span>
-  <span style="color:#66d9ef">keep</span>: <span style="color:#ae81ff">10</span>
-  <span style="color:#75715e"># This can be one of the following:</span>
-  <span style="color:#75715e"># - rotate:</span>
-  <span style="color:#75715e"># Generates a new user/pwd pair per builds.</span>
-  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
-  <span style="color:#75715e"># - static:</span>
-  <span style="color:#75715e"># Generates a new user/pwd pair only on first build.</span>
-  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
-  <span style="color:#75715e"># - manual:</span>
-  <span style="color:#75715e"># Uses the same user/pwd pair than the one found in the database.credentials_file.</span>
-  <span style="color:#75715e"># This is useful for locked-down setups where you do not have GRANT permissions.</span>
-  <span style="color:#66d9ef">credentials_handling</span>: rotate
-  <span style="color:#66d9ef">databases</span>:
-    - <span style="color:#66d9ef">database</span>: <span style="color:#e6db74">&#34;{{ project_name }}_{{ build_type }}&#34;</span>
-      <span style="color:#66d9ef">user</span>: <span style="color:#e6db74">&#34;{{ project_name }}_{{ build_type }}&#34;</span>
-      <span style="color:#66d9ef">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
-
-</code></pre></div><!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">mysql_backup</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">handling</span>: <span style="color:#ae81ff">rolling</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Location on deploy server where the generated MySQL password will be stashed - should be temporary storage</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mysql_password_path</span>: <span style="color:#e6db74">&#34;/tmp/.ce-deploy/{{ project_name }}_{{ build_type }}_{{ build_number }}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Uncomment to login with MySQL socket instead of TCP/IP (e.g. for MariaDB after secure set-up)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#mysql_unix_socket: /run/mysqld/mysqld.sock</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Number of dumps/db to keep. Note this is independant from the build codebases.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">keep</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># This can be one of the following:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - rotate:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Generates a new user/pwd pair per builds.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - static:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Generates a new user/pwd pair only on first build.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># This require that the credentials passed as database.credentials_file have GRANT permissions.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - manual:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Uses the same user/pwd pair than the one found in the database.credentials_file.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># This is useful for locked-down setups where you do not have GRANT permissions.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">credentials_handling</span>: <span style="color:#ae81ff">rotate</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">databases</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">database</span>: <span style="color:#e6db74">&#34;{{ (project_name + &#39;_&#39; + build_type) | regex_replace(&#39;-&#39;, &#39;_&#39;) }}&#34;</span> <span style="color:#75715e"># avoid hyphens in MySQL database names</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">user</span>: <span style="color:#e6db74">&#34;{{ (project_name + &#39;_&#39; + build_type) | truncate(32, true, &#39;&#39;, 0) }}&#34;</span> <span style="color:#75715e"># 32 char limit</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">credentials_file</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.mysql.creds&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#handling: none # optional override to the main handling method on a per database basis - must be &#39;none&#39; for replicas</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#is_replica: true # tell ce-deploy this database is a replica - can only be true, remove/comment out if not required</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 
@@ -44,6 +58,7 @@
   <ul>
     <li><a href="#mysql-backups">MySQL backups</a>
       <ul>
+        <li><a href="#replicas">Replicas</a></li>
         <li><a href="#default-variables">Default variables</a></li>
       </ul>
     </li>
@@ -52,89 +67,187 @@
     </aside><aside class="menu">
 <p> </p>
 <ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/">Home</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install">Install</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts">Usage</a></li>
-<li><a href="roles">Roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call">API call</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache">Opcache</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev">ce-dev</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild">ce-dev prebuild</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli">CLI Tools</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool">Drush</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush">Drush</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer">Composer</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate">Config</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic">Mautic</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron">Cron</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup">Database backup cron task</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql">Database backup cron task - MySQL</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7">Drupal 7 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8">Drupal 8 cron</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo">Database backup cron task - MySQL</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic">Mautic cron tasks</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup">Data backups</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql">MySQL backups</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code">Deploy</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container">Deploy container</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init">Init</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run">LHCI run</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta">&ldquo;Meta&rdquo;</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7">Drupal 7</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8">Drupal 8</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo">Matomo</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic">Mautic</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp">SimpleSAMLphp</a></li>
-</ul>
-</li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm">NPM</a></li>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync">Sync roles</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync">Database sync</a>
-<ul>
-<li><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql">Database sync - MySQL</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/" >Home</a>
 
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install" >Install</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts" >Usage</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles" >Roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call" >API call</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache" >Opcache</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony" >Symfony</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev" >ce-dev</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild" >ce-dev prebuild</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli" >CLI Tools</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool" >Drush</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush" >Drush</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer" >Composer</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate" >Config</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic" >Mautic</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron" >Cron</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup" >Database backup cron task</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql" >Database backup cron task - MySQL</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7" >Drupal 7 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8" >Drupal 8 cron</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo" >Database backup cron task - MySQL</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic" >Mautic cron tasks</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup" >Data backups</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql" >MySQL backups</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code" >Deploy</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container" >Deploy container</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit" >Exit</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init" >Init</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run" >LHCI run</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode" >Maintenance Mode</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta" >&ldquo;Meta&rdquo;</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10" >Drupal 10</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7" >Drupal 7</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8" >Drupal 8</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo" >Matomo</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic" >Mautic</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp" >SimpleSAMLphp</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm" >NPM</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync" >Sync roles</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync" >Database sync</a>
+
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql" >Database sync - MySQL</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </aside>
     </body>
 </html>

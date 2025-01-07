@@ -7,16 +7,37 @@
   
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.a5be948f3ce84fca7dc597e47b7bb98101cec76fa354cce27baa38078b559a24.css">
 </head><body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x/home">ce-deploy</a></header><article>
-        <h1 id="drupal-7">Drupal 7</h1>
-<p>Role for deploying single Drupal 7 instances, or multisites with a single database.</p>
+        <h1 id="maintenance-mode">Maintenance Mode</h1>
+<p>This role and its sub-roles handle various methods for putting applications into an offline maintenance state. See each sub-role&rsquo;s own defaults for additional variables.</p>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="default-variables">Default variables</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Puts site(s) offline.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">maintenance_mode</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Where do we apply maintenance - can be invoked more than one time for different purposes.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - nginx: serves a static maintenance page</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - drupal-core: application level</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - statuscake: disables a StatusCake check</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @todo - haproxy: serves a static maintenance page.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @todo - drupal-read-only: application level via readonly module.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">mode</span>: <span style="color:#e6db74">&#34;nginx&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - offline: puts the site offline</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># @todo - restricted: put the site offline except for whitelist (nginx/haproxy only)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - online: brings the site back online.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">operation</span>: <span style="color:#e6db74">&#34;offline&#34;</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#drupal-7">Drupal 7</a></li>
+    <li><a href="#maintenance-mode">Maintenance Mode</a>
+      <ul>
+        <li><a href="#default-variables">Default variables</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </aside><aside class="menu">

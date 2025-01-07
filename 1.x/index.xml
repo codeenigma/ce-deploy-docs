@@ -6,464 +6,356 @@
     <description>Recent content on ce-deploy</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-	<atom:link href="https://codeenigma.github.io/ce-deploy-docs/1.x/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="https://codeenigma.github.io/ce-deploy-docs/1.x/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/_sidebar/</guid>
-      <description>   Home   Install   Usage   Roles   API call   Config   Drupal 7   Drupal 8   Matomo   Drupal 8   Opcache     ce-dev   ce-dev prebuild     CLI Tools   Drush   Drush     Composer   Config   Drupal 7   Drupal 8   Drupal 8   Mautic     Cron   Database backup cron task   Database backup cron task - MySQL     Drupal 7 cron   Drupal 8 cron   Database backup cron task - MySQL   Mautic cron tasks     Data backups   MySQL backups     Deploy   Deploy container   Init   LHCI run   &amp;ldquo;Meta&amp;rdquo;   Drupal 7   Drupal 8   Matomo   Mautic   SimpleSAMLphp     NPM   Sync roles   Database sync   Database sync - MySQL           </description>
+      <description> Home Install Usage Roles API call Config Drupal 7 Drupal 8 Matomo Opcache Symfony ce-dev ce-dev prebuild CLI Tools Drush Drush Composer Config Drupal 7 Drupal 8 Drupal 8 Mautic Cron Database backup cron task Database backup cron task - MySQL Drupal 7 cron Drupal 8 cron Database backup cron task - MySQL Mautic cron tasks Data backups MySQL backups Deploy Deploy container Exit Init LHCI run Maintenance Mode &amp;ldquo;Meta&amp;rdquo; Drupal 10 Drupal 7 Drupal 8 Matomo Mautic SimpleSAMLphp NPM Sync roles Database sync Database sync - MySQL </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/</guid>
       <description>Contribute Documentation </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/install/</guid>
-      <description>Install The stack only gets tested on Debian Buster, but should run on any Linux distribution, as long as Ansible &amp;gt;=2.9 is present. You can install either:
- through ce-provision  manually by running a local playbook with Docker (soon)  Install with ce-provision The companion ce-provision stack already provides an &amp;ldquo;ce_deploy&amp;rdquo; role you can add to your playbooks. This is the recommended way if you use ce-provision already.
-Install manually Dependencies The main prerequesites are obviously Ansible and git.</description>
+      <description>Install The stack only gets tested on Debian Buster, but should run on any Linux distribution, as long as Ansible &amp;gt;=2.9 is present. You can install either:&#xA;through ce-provision manually by running a local playbook with Docker (soon) Install with ce-provision The companion ce-provision stack already provides an &amp;ldquo;ce_deploy&amp;rdquo; role you can add to your playbooks. This is the recommended way if you use ce-provision already.&#xA;Install manually Dependencies The main prerequesites are obviously Ansible and git.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/</guid>
       <description>Roles Ansible roles and group of roles that constitute the deploy stack.</description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_exit/</guid>
+      <description>Exit Mandatory role that must run after any other ce-deploy roles when executing a playbook.</description>
+    </item>
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_init/</guid>
-      <description>Init These variables must be set in the deploy/common.yml file, at least.
-Default variables --- # Common defaults. Given the &amp;#34;_init&amp;#34; role is mandatory, # this will ensure defaults to other roles too. # If you are using ce-provision to deploy infrastructure this must match the `user_deploy.username` variable deploy_user: &amp;#34;deploy&amp;#34; # for MySQL CE you might want to add &amp;#39;--set-gtid-purged=OFF --skip-definer&amp;#39; here _mysqldump_params: &amp;#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&amp;#34; drupal: drush_verbose_output: false sites: - folder: &amp;#34;default&amp;#34; public_files: &amp;#34;sites/default/files&amp;#34; # Drupal 8 variables config_sync_directory: &amp;#34;config/sync&amp;#34; config_import_command: &amp;#34;&amp;#34; # i.</description>
+      <description>Init Mandatory role that must run before any other ce-deploy roles when executing a playbook.&#xA;These variables must be set in a common variables file if you do not wish to use defaults.&#xA;In order to manipulate an AWS Autoscaling Group (ASG) your deploy user must have an AWS CLI profile for a user with the following IAM permissions:&#xA;autoscaling:ResumeProcesses autoscaling:SuspendProcesses autoscaling:DescribeScalingProcessTypes autoscaling:DescribeAutoScalingGroups Set the aws_asg.name to the machine name of your ASG in order to automatically suspend and resume autoscaling on build.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/</guid>
       <description>&amp;ldquo;Meta&amp;rdquo; Roles that bundles other individual roles together for tackling common use cases.</description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal10/</guid>
+      <description>Drupal 10 Role for deploying single Drupal instances, or multisites with a single database, of Drupal version 10.0.0 or higher.&#xA;You should always top and tail this role with the _init and _exit roles and include the files with your Ansible variable overrides in via vars_files, here is an example playbook:&#xA;--- - hosts: web1.example.com vars_files: - vars/common.yml - vars/prod.yml roles: - _init - _meta/deploy-drupal10 - _exit </description>
+    </item>
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal7/</guid>
       <description>Drupal 7 Role for deploying single Drupal 7 instances, or multisites with a single database.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-drupal8/</guid>
       <description>Drupal 8 Role for deploying single Drupal 8 instances, or multisites with a single database.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-matomo/</guid>
       <description>Matomo Role for deploying Matomo instances.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-mautic/</guid>
       <description>Mautic Role for deploying Mautic instances.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/deploy-simplesamlphp/</guid>
-      <description>SimpleSAMLphp Role for deploying single SimpleSAMLphp instances. Do not use if you are deploying SimpleSAMLphp with another application like Drupal via composer.
-This role currently assumes all config is in the repository alongside composer.json and the special SIMPLESAMLPHP_CONFIG_DIR variable is passed in via the web server vhost to tell SimpleSAMLphp where the config is on the server. For vhost configuration in Nginx see ce-provision:
- https://github.com/codeenigma/ce-provision/blob/1.x/roles/nginx  </description>
+      <description>SimpleSAMLphp Role for deploying single SimpleSAMLphp instances. Do not use if you are deploying SimpleSAMLphp with another application like Drupal via composer.&#xA;This role currently assumes all config is in the repository alongside composer.json and the special SIMPLESAMLPHP_CONFIG_DIR variable is passed in via the web server vhost to tell SimpleSAMLphp where the config is on the server. For vhost configuration in Nginx see ce-provision:&#xA;https://github.com/codeenigma/ce-provision/blob/1.x/roles/nginx </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call/</guid>
-      <description>API call Making RESTful API calls to other platforms.
-Default variables --- api_call: type: gitlab base_url: https://gitlab.example.com/api/v4/ path: projects # see documentation - https://docs.gitlab.com/ee/api/ method: GET token: &amp;#34;&amp;#34; # empty means anonymous action token_type: trigger # options are &amp;#39;trigger&amp;#39; or &amp;#39;personal&amp;#39; variables: [] status_codes: - 200 - 201 - 202 </description>
+      <description>API call Making RESTful API calls to other platforms.&#xA;Default variables --- api_call: type: gitlab base_url: https://gitlab.example.com/api/v4/ path: projects # see documentation - https://docs.gitlab.com/ee/api/ method: GET token: &amp;#34;&amp;#34; # empty means anonymous action token_type: trigger # options are &amp;#39;trigger&amp;#39; or &amp;#39;personal&amp;#39; variables: [] status_codes: - 200 - 201 - 202 </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/</guid>
       <description>Config Cache clearing commands.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal7/</guid>
       <description>Drupal 7 Clear caches for Drupal 7.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-drupal8/</guid>
       <description>Drupal 8 Clear caches for Drupal 8.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-matomo/</guid>
       <description>Matomo Clear caches for Matomo.</description>
     </item>
-    
-    <item>
-      <title></title>
-      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-mautic/</guid>
-      <description>Drupal 8 Clear caches for Drupal 8.</description>
-    </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-opcache/</guid>
-      <description>Opcache Clear opcache.
-Default variables --- cache_clear_opcache: # Adapter string to use as argument. # eg. # --fcgi=127.0.0.1:9000 # Leave blank to use /etc/cachetool.yml # adapter: &amp;#34;127.0.0.1:9081&amp;#34; # Leave commented to automatically detect the adapter based on PHP version. # Bins to clear. clear_opcache: true clear_apcu: false clear_stat: false # cachetool_bin: &amp;#34;/path/to/cachetool.phar&amp;#34; # see _init for paths if undefined </description>
+      <description>Opcache Clear opcache.&#xA;Default variables --- cache_clear_opcache: # Adapter string to use as argument. # eg. # --fcgi=127.0.0.1:9000 # Leave blank to use /etc/cachetool.yml # adapter: &amp;#34;--fcgi=127.0.0.1:9081&amp;#34; # Leave commented to automatically detect the adapter based on PHP version. # Bins to clear. clear_opcache: true clear_apcu: false clear_stat: true # cachetool_bin: &amp;#34;/path/to/cachetool.phar&amp;#34; # see _init for paths if undefined </description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/cache_clear-symfony/</guid>
+      <description>Symfony Clears the Symfony application cache.&#xA;Default variables --- cache_clear_symfony_env: prod </description>
+    </item>
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/</guid>
-      <description>ce-dev Roles that integrate with local dev environments.
-Dependencies These roles need https://github.com/codeenigma/ce-dev available.</description>
+      <description>ce-dev Roles that integrate with local dev environments.&#xA;Dependencies These roles need https://github.com/codeenigma/ce-dev available.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/ce_dev_prebuild/</guid>
-      <description>ce-dev prebuild Prebuild Docker images for re-use in ce-dev locally.
-Default variables --- ce_dev_prebuild: compose_template: ce-dev.compose.yml compose_prebuilt_template: ce-dev.compose.prebuilt.yml source_registry: user: &amp;#39;&amp;#39; password: &amp;#39;&amp;#39; target_registry: user: &amp;#39;&amp;#39; password: &amp;#39;&amp;#39; </description>
+      <description>ce-dev prebuild Prebuild Docker images for re-use in ce-dev locally.&#xA;Default variables --- ce_dev_prebuild: compose_template: ce-dev.compose.yml compose_prebuilt_template: ce-dev.compose.prebuilt.yml source_registry: user: &amp;#39;&amp;#39; password: &amp;#39;&amp;#39; target_registry: user: &amp;#39;&amp;#39; password: &amp;#39;&amp;#39; </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/</guid>
       <description>CLI Tools Roles to install app-specific cli tool and utilities (Drush, &amp;hellip;)</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/cachetool/</guid>
-      <description>Drush Installs the drush command-line tool for the deploy user.
-Default variables --- cachetool: version: &amp;#34;&amp;#34; # enter three-digit version number, e.g. &amp;#34;7.0.0&amp;#34;, to install a specific version. If not specified, will be installed depending on the php version. </description>
+      <description>Drush Installs the drush command-line tool for the deploy user.&#xA;Default variables --- cachetool: version: &amp;#34;&amp;#34; # enter three-digit version number, e.g. &amp;#34;7.0.0&amp;#34;, to install a specific version. If not specified, will be installed depending on the php version. </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/drush/</guid>
-      <description>Drush Installs the drush command-line tool for the deploy user. This only works with Drupal 7 and will be withdrawn with Drupal 7 EOL .
-For Drupal 8 and above you must install drush with composer as described in the drush documentation .
-Default variables --- drush: # Where possible always load drush in your Drupal website with composer. version: 8.4.11 use_vendor: false </description>
+      <description>Drush Installs the drush command-line tool for the deploy user. This only works with Drupal 7 and will be withdrawn with Drupal 7 EOL .&#xA;For Drupal 8 and above you must install drush with composer as described in the drush documentation .&#xA;Default variables --- drush: # Where possible always load drush in your Drupal website with composer. version: 8.4.11 use_vendor: false </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/</guid>
-      <description>Composer Performs a composer install on a freshly deployed codebase.
-Default variables --- composer: command: install no_dev: true working_dir: &amp;#34;{{ deploy_path }}&amp;#34; apcu_autoloader: true # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # create: wether to create the target if it does not exists.</description>
+      <description>Composer Performs a composer install on a freshly deployed codebase.&#xA;Default variables --- composer: command: install no_dev: true working_dir: &amp;#34;{{ deploy_path }}&amp;#34; apcu_autoloader: true # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # force: set to true to create the symlinks in two cases: the source file does not exist but will appear later; the destination exists and is a file.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/</guid>
-      <description>Config Generates config files and handles sensitive variables.
-Default variables --- config_generate: # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # create: wether to create the target if it does not exists. # - src: &amp;#39;/home/{{ deploy_user }}//{{ project_name }}_{{ build_type }}/simplesaml&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; # - src: &amp;#39;/var/simplesaml/etc&amp;#39; # dest: &amp;#39;vendor/simplesamlphp/simplesamlphp/config&amp;#39; symlinks: [] # Specify any additional templates to generate, with src (template) and dest (file).</description>
+      <description>Config Generates config files and handles sensitive variables.&#xA;Default variables --- config_generate: # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg. &amp;#39;www/themes/myassets&amp;#39;, &amp;#39;var/cache&amp;#39;) # force: set to true to create the symlinks in two cases: the source file does not exist but will appear later; the destination exists and is a file.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal7/</guid>
       <description>Drupal 7 Generates settings.php file for Drupal 7.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-drupal8/</guid>
-      <description>Drupal 8 Generates settings.php file for Drupal 8.</description>
+      <description>Drupal 8 Generates settings.php file for Drupal 8.&#xA;Default variables config_generate_drupal: # If you need to specify an exact file name for a template file to use for a build, you can do it here. drupal_settings_file_name: settings.php drush_settings_file_name: drush.yml </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-matomo/</guid>
       <description>Drupal 8 Generates settings.php file for Drupal 8.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/config_generate-mautic/</guid>
       <description>Mautic Generates local.php file for Mautic.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/</guid>
       <description>Cron Roles to generate cron entries.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/</guid>
       <description>Database backup cron task Ensure regular local backups of databases.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_database_backup/cron_database_backup-mysql/</guid>
-      <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.
-Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&amp;#34; keep: 10 mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here </description>
+      <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.&#xA;Default variables --- cron_mysql_backup: dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&amp;#34; keep: 10 mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</guid>
-      <description>Drupal 7 cron Ensure Drupal cron entries are run.
-Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+      <description>Drupal 7 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</guid>
-      <description>Drupal 8 cron Ensure Drupal cron entries are run.
-Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+      <description>Drupal 8 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_matomo/</guid>
-      <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.
-Default variables --- cron_matomo: url: &amp;#34;https://example.com/matomo&amp;#34; log_directory: &amp;#34;/home/{{ deploy_user }}/matomo-archive/{{ project_name }}_{{ build_type }}&amp;#34; keep: 10 </description>
+      <description>Database backup cron task - MySQL Ensure regular local backups of MySQL databases.&#xA;Default variables --- cron_matomo: url: &amp;#34;https://example.com/matomo&amp;#34; log_directory: &amp;#34;/home/{{ deploy_user }}/matomo-archive/{{ project_name }}_{{ build_type }}&amp;#34; keep: 10 </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_mautic/</guid>
-      <description>Mautic cron tasks Ensure Mautic cron entries are run.
-Default variables --- cron_mautic: entries: - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; job: mautic:segments:update - minute: &amp;#34;*/{{ 15 | random(start=1) }}&amp;#34; job: mautic:campaigns:update - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 4 job: mautic:campaigns:trigger - minute: &amp;#34;{{ 50 | random(start=40) }}&amp;#34; job: mautic:social:monitoring - minute: &amp;#34;{{ 40 | random(start=30) }}&amp;#34; job: mautic:emails:send - minute: &amp;#34;*/{{ 15 | random(start=1) }}&amp;#34; job: mautic:import </description>
+      <description>Mautic cron tasks Ensure Mautic cron entries are run.&#xA;Default variables --- cron_mautic: entries: - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; job: mautic:segments:update - minute: &amp;#34;*/{{ 15 | random(start=1) }}&amp;#34; job: mautic:campaigns:update - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 4 job: mautic:campaigns:trigger - minute: &amp;#34;{{ 50 | random(start=40) }}&amp;#34; job: mautic:social:monitoring - minute: &amp;#34;{{ 40 | random(start=30) }}&amp;#34; job: mautic:emails:send - minute: &amp;#34;*/{{ 15 | random(start=1) }}&amp;#34; job: mautic:import </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/</guid>
-      <description>Data backups Generate backups for each build.
-Default variables --- database_backup: engines: - mysql revert: true </description>
+      <description>Data backups Generate backups for each build.&#xA;Default variables --- database_backup: engines: - mysql revert: true </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/database_backup-mysql/</guid>
-      <description>MySQL backups Generate MySQL backups for each build.
-Default variables --- mysql_backup: handling: rolling dumps_directory: &amp;#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/build&amp;#34; mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here # Number of dumps/db to keep. Note this is independant from the build codebases. keep: 10 # This can be one of the following: # - rotate: # Generates a new user/pwd pair per builds. # This require that the credentials passed as database.</description>
+      <description>MySQL backups Generate MySQL backups for each build.&#xA;Replicas If you are using a read only replica in your application and you need to add it to databases in order to have access to the credentials for your app settings, be sure to set the database up in a similar way to this:&#xA;mysql_backup: databases: - database: &amp;#34;{{ (project_name + &amp;#39;_&amp;#39; + build_type) | regex_replace(&amp;#39;-&amp;#39;, &amp;#39;_&amp;#39;) }}&amp;#34; user: &amp;#34;{{ (project_name + &amp;#39;_&amp;#39; + build_type) | truncate(32, true, &amp;#39;&amp;#39;, 0) }}&amp;#34; credentials_file: &amp;#34;/home/{{ deploy_user }}/.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/</guid>
-      <description>Deploy Step that deploys the codebase. On standalone machines and &amp;ldquo;static&amp;rdquo; clusters of web servers (e.g. machines whose addressing never changes) this is reasonably straightforward, the default variables should &amp;ldquo;just work&amp;rdquo;. This role also supports deployment to autoscaling clusters of web servers, such as AWS autoscaling groups or containerised architecture. More details on that after this section.
-The shell script that wraps Ansible to handle the various build steps has various &amp;ldquo;stages&amp;rdquo; and the deploy_code role has a set of tasks for each stage.</description>
+      <description>Deploy Step that deploys the codebase. On standalone machines and &amp;ldquo;static&amp;rdquo; clusters of web servers (e.g. machines whose addressing never changes) this is reasonably straightforward, the default variables should &amp;ldquo;just work&amp;rdquo;. This role also supports deployment to autoscaling clusters of web servers, such as AWS autoscaling groups or containerised architecture. More details on that after this section.&#xA;The shell script that wraps Ansible to handle the various build steps has various &amp;ldquo;stages&amp;rdquo; and the deploy_code role has a set of tasks for each stage.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container/</guid>
-      <description>Deploy container Step that deploys the codebase in a Docker container image. Requires Docker and the community.docker collection for Ansible to be installed on your deploy server. You will also need to add a docker group and make sure your local deploy user is in that group, for example:
-sudo groupadd docker sudo usermod -aG docker deploy This can be handled automatically by ce-provision using the ce_deploy and docker_ce roles.</description>
+      <description>Deploy container Step that deploys the codebase in a Docker container image. Requires Docker and the community.docker collection for Ansible to be installed on your deploy server. You will also need to add a docker group and make sure your local deploy user is in that group, for example:&#xA;sudo groupadd docker sudo usermod -aG docker deploy This can be handled automatically by ce-provision using the ce_deploy and docker_ce roles.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run/</guid>
-      <description>LHCI run Step that runs LHCI against the codebase. Requires LHCI and Google Chrome to be installed on the web server or container. This can be done with ce-provision, see:
- https://github.com/codeenigma/ce-provision/tree/1.x/roles/lhci  This role is automatically present in preset ce-dev images on Docker Hub so you can just use lhci_run for local testing directly.
-For more information on LHCI, see https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md
-Default variables --- lhci_run: # Create a list of URLs to test with LHCI test_urls: - &amp;#34;http://www.</description>
+      <description>LHCI run Step that runs LHCI against the codebase. Requires LHCI and Google Chrome to be installed on the web server or container. This can be done with ce-provision, see:&#xA;https://github.com/codeenigma/ce-provision/tree/1.x/roles/lhci This role is automatically present in preset ce-dev images on Docker Hub so you can just use lhci_run for local testing directly.&#xA;For more information on LHCI, see https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md Default variables --- lhci_run: # Create a list of URLs to test with LHCI test_urls: - &amp;#34;http://www.</description>
     </item>
-    
+    <item>
+      <title></title>
+      <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode/</guid>
+      <description>Maintenance Mode This role and its sub-roles handle various methods for putting applications into an offline maintenance state. See each sub-role&amp;rsquo;s own defaults for additional variables.&#xA;Default variables --- # Puts site(s) offline. maintenance_mode: # Where do we apply maintenance - can be invoked more than one time for different purposes. # - nginx: serves a static maintenance page # - drupal-core: application level # - statuscake: disables a StatusCake check # @todo - haproxy: serves a static maintenance page.</description>
+    </item>
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</guid>
-      <description>NPM Performs npm or yarn tasks on a freshly deployed codebase.
-Default variables --- npm: # npm/yarn executor: npm working_dir: &amp;#34;{{ deploy_path }}&amp;#34; # A list of commands to execute. # eg: # - install # - build-prod commands: [] # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg.</description>
+      <description>NPM Performs npm or yarn tasks on a freshly deployed codebase.&#xA;Default variables --- npm: # npm/yarn executor: npm working_dir: &amp;#34;{{ deploy_path }}&amp;#34; # A list of commands to execute. # eg: # - install # - build-prod commands: [] # Specify any additional symlink to create, with src (target) and dest (link). # src: can be either absolute or relative to the dest (eg. &amp;#39;/var/my_data&amp;#39;, &amp;#39;/home/deploy/simplesaml&amp;#39;, &amp;#39;../../../myconfig&amp;#39;) # dest: can only be relative to the root of your repository (eg.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sanitize/admin_creds/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sanitize/admin_creds/</guid>
-      <description>Admin credentials Reset the admin username and/or password on each build.
-Default variables --- admin_creds: username: &amp;#34;{{ lookup(&amp;#39;password&amp;#39;, &amp;#39;/dev/null chars=ascii_letters length=20&amp;#39;) }}&amp;#34; password: &amp;#34;{{ lookup(&amp;#39;password&amp;#39;, &amp;#39;/dev/null length=40&amp;#39;) }}&amp;#34; </description>
+      <description>Admin credentials Reset the admin username and/or password on each build.&#xA;Default variables --- admin_creds: username: &amp;#34;{{ lookup(&amp;#39;password&amp;#39;, &amp;#39;/dev/null chars=ascii_letters length=20&amp;#39;) }}&amp;#34; password: &amp;#34;{{ lookup(&amp;#39;password&amp;#39;, &amp;#39;/dev/null length=40&amp;#39;) }}&amp;#34; </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/</guid>
       <description>Sync roles Roles that sync data/assets between environments.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/</guid>
-      <description>Database sync Roles that sync databases between environments.
-Default variables --- database_sync: engines: - mysql </description>
+      <description>Database sync Roles that sync databases between environments.&#xA;Default variables --- database_sync: engines: - mysql </description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</guid>
-      <description>Database sync - MySQL Sync MySQL databases between environments.
-Default variables --- mysql_sync: mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here. cleanup: true # if false leaves tmp database dump on deploy server for debugging purposes. archival_method: &amp;#34;bzip2&amp;#34; # oprions are &amp;#34;bzip2&amp;#34; or &amp;#34;gzip&amp;#34;. databases: - source: # Name of the database to take a dump from. database: &amp;#34;{{ project_name }}_prod&amp;#34; # Host that can connect to the database.</description>
+      <description>Database sync - MySQL Sync MySQL databases between environments.&#xA;In order to manipulate an AWS Autoscaling Group (ASG) your deploy user must have an AWS CLI profile for a user with the following IAM permissions:&#xA;autoscaling:ResumeProcesses autoscaling:SuspendProcesses autoscaling:DescribeScalingProcessTypes autoscaling:DescribeAutoScalingGroups Default variables --- mysql_sync: mysqldump_params: &amp;#34;{{ _mysqldump_params }}&amp;#34; # set in _init but you can override here. cleanup: true # if false leaves tmp database dump on deploy server for debugging purposes.</description>
     </item>
-    
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</guid>
-      <description>Usage While you can re-use/fork roles or call playbooks directly from your deployment tool, it is recommended to use the provided wrapper scripts, as they will take care of setting up the needed environments.
-Deploy with the &amp;ldquo;build&amp;rdquo; script In the script folder, you&amp;rsquo;ll see a build.sh script. This is the easiest/safest way to trigger deployments, as it bundles all the steps in one.
-Arguments You will need to pass at least the following information:</description>
+      <description>Usage While you can re-use/fork roles or call playbooks directly from your deployment tool, it is recommended to use the provided wrapper scripts, as they will take care of setting up the needed environments.&#xA;Deploy with the &amp;ldquo;build&amp;rdquo; script In the script folder, you&amp;rsquo;ll see a build.sh script. This is the easiest/safest way to trigger deployments, as it bundles all the steps in one.&#xA;Arguments You will need to pass at least the following information:</description>
     </item>
-    
   </channel>
 </rss>
