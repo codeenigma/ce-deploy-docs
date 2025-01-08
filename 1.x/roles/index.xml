@@ -222,14 +222,14 @@
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal7/</guid>
-      <description>Drupal 7 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+      <description>Drupal 7 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # mailto: &amp;#34;{{ drupal.</description>
     </item>
     <item>
       <title></title>
       <link>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/cron_drupal8/</guid>
-      <description>Drupal 8 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # If the sites are being deployed to an ASG, setting defer to true will create the crontab entry on the deploy server rather than all of the app servers.</description>
+      <description>Drupal 8 cron Ensure Drupal cron entries are run.&#xA;Default variables --- # This role takes its parameters from the &amp;#34;drupal.sites&amp;#34; variables directly. drupal: sites: - folder: &amp;#34;default&amp;#34; # ... See the _init role for other variables. cron: # These are the relevant parts for cron. - minute: &amp;#34;*/{{ 10 | random(start=1) }}&amp;#34; # hour: 2 # day: # weekday: # month: job: cron # disabled: true # mailto: &amp;#34;{{ drupal.</description>
     </item>
     <item>
       <title></title>
