@@ -20,9 +20,9 @@
 <p>For more information on LHCI, see 
 <a href="https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md"  target="_blank" rel="noopener">https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md</a>
 </p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--TOC-->
+<!--ENDTOC-->
+<!--ROLEVARS-->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
 </span></span><span style="display:flex;"><span><span style="color:#f92672">lhci_run</span>:
@@ -43,7 +43,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Optional lists of audits to explicitly skip or run.</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">skip_audits</span>: []
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">only_audits</span>: []
-</span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></code></pre></div><!--ENDROLEVARS-->
 <p>The role installs <code>Xvfb</code> for &lsquo;headful&rsquo; running of Google Chrome. This is preconfigured to run in the background with a display ID of 99, so you should run this command before running any <code>lhci</code> tests to ensure Chrome has an X session to run in:</p>
 <pre tabindex="0"><code>export DISPLAY=:99
 </code></pre><p>To view the <code>Xvfb</code> display, from inside the web container run <code>x11vnc -display :99 &amp;</code></p>

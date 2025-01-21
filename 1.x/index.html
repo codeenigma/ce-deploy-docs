@@ -14,73 +14,68 @@
 <p>A set of Ansible roles and wrapper scripts to deploy (web) applications.</p>
 <h2 id="overview">Overview</h2>
 <p>The &ldquo;stack&rdquo; from this repo is to be installed on a &ldquo;deploy&rdquo; server/runner, to be used in conjonction with a CI/CD tool (Jenkins, Gitlab, Travis, &hellip;).
-It allows the deploy steps for a given app to be easily customizable at will, and to be stored alongside the codebase of the project.
+It allows the deploy steps for a given app to be easily customisable and to be stored alongside the codebase of the project.
 When triggered from a deployment tool, the stack will clone the codebase and &ldquo;play&rdquo; a given deploy playbook from there.</p>
-<!-- raw HTML omitted -->
-<h2 id="installinstallreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md" >Install</a>
-</h2>
-<p>The stack only gets tested on Debian Buster, but should run on any Linux distribution, as long as Ansible &gt;=2.9 is present.
+<!--TOC-->
+<h2 id="install">Install</h2>
+<p>The stack only gets tested on Debian Linux, but should run on any Linux distribution, as long as Ansible &gt;=2.9 is present.
 You can install either:</p>
 <ul>
-<li>through 
-<a href="https://github.com/codeenigma/ce-provision"  target="_blank" rel="noopener">ce-provision</a>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md#install-with-ce-provision" >With ce-provision</a>
 </li>
-<li>manually by running a local playbook</li>
-<li>with Docker (soon)</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md#install-manually" >Manually by running a local playbook</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md#install-with-docker" >With Docker (coming soon)</a>
+</li>
 </ul>
-<h2 id="usagescriptsreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/README.md" >Usage</a>
-</h2>
+<p>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md" >More installation instructions can be found here.</a>
+</p>
+<p>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/install/README.md#configuration" >Configuration options here.</a>
+</p>
+<h2 id="usage">Usage</h2>
 <p>While you can re-use/fork roles or call playbooks directly from your deployment tool, it is recommended to use the provided wrapper scripts, as they will take care of setting up the needed environments.</p>
-<h2 id="rolesrolesreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/README.md" >Roles</a>
-</h2>
-<p>Ansible roles and group of roles that constitute the deploy stack.</p>
-<h3 id="configrolescache_clearreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear/README.md" >Config</a>
-</h3>
-<p>Cache clearing commands.</p>
-<h3 id="ce-devrolesce_devreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/ce_dev/README.md" >ce-dev</a>
-</h3>
-<p>Roles that integrate with local dev environments.</p>
-<h3 id="cli-toolsrolesclireadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/README.md" >CLI Tools</a>
-</h3>
-<p>Roles to install app-specific cli tool and utilities (Drush, &hellip;)</p>
-<h3 id="composerrolescomposerreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/composer/README.md" >Composer</a>
-</h3>
-<p>Performs a composer install on a freshly deployed codebase.</p>
-<h3 id="configrolesconfig_generatereadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/config_generate/README.md" >Config</a>
-</h3>
-<p>Generates config files and handles sensitive variables.</p>
-<h3 id="cronrolescronreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/README.md" >Cron</a>
-</h3>
-<p>Roles to generate cron entries.</p>
-<h3 id="data-backupsrolesdatabase_backupreadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/README.md" >Data backups</a>
-</h3>
-<p>Generate backups for each build.</p>
-<h3 id="deployrolesdeploy_codereadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_code/README.md" >Deploy</a>
-</h3>
-<p>Step that deploys the codebase.</p>
-<h3 id="metarolesmetareadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/meta/README.md" >&ldquo;Meta&rdquo;</a>
-</h3>
-<p>Roles that bundles other individual roles together for tackling common use cases.</p>
-<h3 id="sync-rolesrolessyncreadmemd">
+<ul>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/README.md#deploy-with-the-build-script" >Deploy with the &ldquo;build&rdquo; script</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/README.md#deploy-with-individual-steps" >Deploy with individual steps</a>
+</li>
+</ul>
+<h2 id="roles">Roles</h2>
+<p>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/README.md" >Ansible roles and group of roles that constitute the deploy stack.</a>
+</p>
+<ul>
+<li>
 <a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/README.md" >Sync roles</a>
-</h3>
-<p>Roles that sync data/assets between environments.</p>
-<h2 id="contributecontributereadmemd">
-<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/README.md" >Contribute</a>
-</h2>
-<!-- raw HTML omitted -->
+ - roles that sync data/assets between environments.</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/_meta/README.md" >&ldquo;Meta&rdquo;</a>
+ - roles that bundles other individual roles together for tackling common use cases.</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/database_backup/README.md" >Data backups</a>
+ - generate backups for each build.</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cron/README.md" >Cron</a>
+ - roles to generate cron entries.</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/code/README.md" >Code deployment</a>
+ - roles managing the codebase: deployment, symlinks, composer steps, &hellip;</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cli/README.md" >CLI Tools</a>
+ - roles to install app-specific cli tool and utilities (Drush, cachetool, &hellip;)</li>
+</ul>
+<h2 id="contribute">Contribute</h2>
+<p>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/contribute/README.md" >Find out more about conrtibuting here.</a>
+</p>
+<!--ENDTOC-->
 
     </article>
     <aside>
@@ -89,23 +84,10 @@ You can install either:</p>
     <li><a href="#ce-deploy">ce-deploy</a>
       <ul>
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#installinstallreadmemd"><a href="install/README.md">Install</a></a></li>
-        <li><a href="#usagescriptsreadmemd"><a href="scripts/README.md">Usage</a></a></li>
-        <li><a href="#rolesrolesreadmemd"><a href="roles/README.md">Roles</a></a>
-          <ul>
-            <li><a href="#configrolescache_clearreadmemd"><a href="roles/cache_clear/README.md">Config</a></a></li>
-            <li><a href="#ce-devrolesce_devreadmemd"><a href="roles/ce_dev/README.md">ce-dev</a></a></li>
-            <li><a href="#cli-toolsrolesclireadmemd"><a href="roles/cli/README.md">CLI Tools</a></a></li>
-            <li><a href="#composerrolescomposerreadmemd"><a href="roles/composer/README.md">Composer</a></a></li>
-            <li><a href="#configrolesconfig_generatereadmemd"><a href="roles/config_generate/README.md">Config</a></a></li>
-            <li><a href="#cronrolescronreadmemd"><a href="roles/cron/README.md">Cron</a></a></li>
-            <li><a href="#data-backupsrolesdatabase_backupreadmemd"><a href="roles/database_backup/README.md">Data backups</a></a></li>
-            <li><a href="#deployrolesdeploy_codereadmemd"><a href="roles/deploy_code/README.md">Deploy</a></a></li>
-            <li><a href="#metarolesmetareadmemd"><a href="roles/meta/README.md">&ldquo;Meta&rdquo;</a></a></li>
-            <li><a href="#sync-rolesrolessyncreadmemd"><a href="roles/sync/README.md">Sync roles</a></a></li>
-          </ul>
-        </li>
-        <li><a href="#contributecontributereadmemd"><a href="contribute/README.md">Contribute</a></a></li>
+        <li><a href="#install">Install</a></li>
+        <li><a href="#usage">Usage</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#contribute">Contribute</a></li>
       </ul>
     </li>
   </ul>

@@ -11,16 +11,16 @@
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
         <h1 id="database-backup-cron-task---mysql">Database backup cron task - MySQL</h1>
 <p>Ensure regular local backups of MySQL databases.</p>
-<!-- raw HTML omitted -->
+<!--ROLEVARS-->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
 </span></span><span style="display:flex;"><span><span style="color:#f92672">cron_mysql_backup</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">dumps_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/shared/{{ project_name }}_{{ build_type }}/db_backups/mysql/regular&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">keep</span>: <span style="color:#ae81ff">10</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">mysqldump_params</span>: <span style="color:#e6db74">&#34;{{ _mysqldump_params }}&#34;</span> <span style="color:#75715e"># set in _init but you can override here</span>
-</span></span></code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+</span></span></code></pre></div><!--ENDROLEVARS-->
+<!--TOC-->
+<!--ENDTOC-->
 
     </article>
     <aside>
