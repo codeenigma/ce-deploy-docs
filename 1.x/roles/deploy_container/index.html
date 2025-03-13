@@ -135,7 +135,7 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">acm</span>: <span style="color:#75715e"># see https://github.com/codeenigma/ce-provision/tree/1.x/roles/aws/aws_acm</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">create_cert</span>: <span style="color:#66d9ef">false</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">extra_domains</span>: [] <span style="color:#75715e"># list of Subject Alternative Name domains and zones</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ssl_certificate_ARN</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># optional SSL cert ARN if you imported one into AWS Certificate Manager</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">ssl_certificate_arn</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># optional SSL cert ARN if you imported one into AWS Certificate Manager</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">elb_security_groups</span>: [] <span style="color:#75715e"># default SG is used if none provided - module supports names or IDs</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">elb_subnets</span>: <span style="color:#75715e"># must be public subnets for public facing applications</span>
 </span></span><span style="display:flex;"><span>      - <span style="color:#ae81ff">example-dev-a</span>
