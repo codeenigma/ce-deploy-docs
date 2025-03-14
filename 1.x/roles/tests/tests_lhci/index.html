@@ -9,16 +9,57 @@
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.79491ecfb2c47d70d8ee01dcbdaa7ed03bd0c57f2b497b82742ef3eeb30ae0db.css">
 </head>
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
-        <h1 id="cli-tools">CLI Tools</h1>
-<p>Roles to install app-specific cli tool and utilities (Drush, &hellip;)</p>
+        <h1 id="lhci-tests">LHCI tests</h1>
+<p>Step that runs LHCI against the codebase. Requires LHCI and Google Chrome to be installed on the web server or container. This can be done with ce-provision, see:</p>
+<ul>
+<li>
+<a href="https://github.com/codeenigma/ce-provision/tree/1.x/roles/lhci"  target="_blank" rel="noopener">https://github.com/codeenigma/ce-provision/tree/1.x/roles/lhci</a>
+</li>
+</ul>
+<p>This role is automatically present in preset ce-dev images on Docker Hub so you can just use <code>tests/tests_lhci</code> for local testing directly.</p>
+<p>For more information on LHCI, see 
+<a href="https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md"  target="_blank" rel="noopener">https://github.com/GoogleChrome/lighthouse-ci/blob/main/docs/getting-started.md</a>
+</p>
 <!--TOC-->
 <!--ENDTOC-->
+<!--ROLEVARS-->
+<h2 id="default-variables">Default variables</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lhci</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Create a list of URLs to test with LHCI</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_urls</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;http://www.example.com&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Number of times LHCI should run on each page</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_runs</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Location to save reports</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">output_directory</span>: <span style="color:#e6db74">&#34;./reports/{{ ansible_date_time.iso8601 }}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Type of report storage (for now only local filesystem is supported)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">upload_target_type</span>: <span style="color:#e6db74">&#34;filesystem&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Flags to pass to Google Chrome</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">chrome_flags</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;--no-sandbox&#34;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;--ignore-certificate-errors&#34;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#e6db74">&#34;--disable-dev-shm-usage&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Optional lists of audits to explicitly skip or run.</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">skip_audits</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">only_audits</span>: []
+</span></span></code></pre></div><!--ENDROLEVARS-->
+<p>The role installs <code>Xvfb</code> for &lsquo;headful&rsquo; running of Google Chrome. This is preconfigured to run in the background with a display ID of 99, so you should run this command before running any <code>lhci</code> tests to ensure Chrome has an X session to run in:</p>
+<pre tabindex="0"><code>export DISPLAY=:99
+</code></pre><p>To view the <code>Xvfb</code> display, from inside the web container run <code>x11vnc -display :99 &amp;</code></p>
+<p>You can then connect from your host machine using a VNC client, such as 
+<a href="https://tigervnc.org"  target="_blank" rel="noopener">https://tigervnc.org</a>
+. You&rsquo;ll need to specify the internal IP of the web container, which you can find in your hosts file.</p>
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#cli-tools">CLI Tools</a></li>
+    <li><a href="#lhci-tests">LHCI tests</a>
+      <ul>
+        <li><a href="#default-variables">Default variables</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </aside><aside class="menu">

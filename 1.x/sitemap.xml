@@ -88,8 +88,6 @@
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/deploy_container/</loc>
   </url><url>
-    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/lhci_run/</loc>
-  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/maintenance_mode/</loc>
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/npm/</loc>
@@ -101,6 +99,12 @@
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/</loc>
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/sync/database_sync/database_sync-mysql/</loc>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/</loc>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/tests_lhci/</loc>
+  </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/tests_phpunit/</loc>
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</loc>
   </url><url>
