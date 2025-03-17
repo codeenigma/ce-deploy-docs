@@ -9,18 +9,40 @@
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.79491ecfb2c47d70d8ee01dcbdaa7ed03bd0c57f2b497b82742ef3eeb30ae0db.css">
 </head>
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
-        <h1 id="config">Config</h1>
-<p>Cache clearing commands.</p>
+        <h1 id="diffy-tests">Diffy tests</h1>
+<p>
+<a href="https://diffy.website/"  target="_blank" rel="noopener">Diffy</a>
+ is a visual regression tool for PHP, predominantly used with WordPress and Drupal.</p>
+<p>In Diffy you must have created a project, set at least one environment up that Diffy can use as a benchmark (role default is <code>dev</code>) and provided Diffy with a set of URLs to test. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">diffy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">main_env</span>: <span style="color:#ae81ff">dev</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env</span>: <span style="color:#ae81ff">custom</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env_url</span>: <span style="color:#ae81ff">http://my-feature-branch.example.com</span>
+</span></span></code></pre></div><p>In this case you have pre-configured an environment called <code>dev</code> in Diffy and given it some test URLs to execute. Diffy will run the tests against the <code>dev</code> environment, then it will test the same paths against whatever site it finds at <code>http://my-feature-branch.example.com</code>. You will then get a report comparing the two sites and highlighting any differences.</p>
 <!--TOC-->
 <!--ENDTOC-->
 <!--ROLEVARS-->
-<!--ENDROLEVARS-->
+<h2 id="default-variables">Default variables</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">diffy</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span>  <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install diffy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">key</span>: <span style="color:#ae81ff">asdfghjkl </span> <span style="color:#75715e"># set your diffy secret key, this should be encrypted with SOPS or stored in some other secrets manager</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">project_id</span>: <span style="color:#ae81ff">1</span>   <span style="color:#75715e"># the numeric ID of your diffy project</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">main_env</span>: <span style="color:#ae81ff">dev  </span> <span style="color:#75715e"># name of the &#39;good&#39; environment to compare against (must be pre-configured in diffy)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env</span>: <span style="color:#ae81ff">custom </span> <span style="color:#75715e"># name of the environment to be compared (usually diffy&#39;s default &#39;custom&#39; environment)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env_url</span>: <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># set a base URL to use against the diffy &#39;custom&#39; environment</span>
+</span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#config">Config</a></li>
+    <li><a href="#diffy-tests">Diffy tests</a>
+      <ul>
+        <li><a href="#default-variables">Default variables</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </aside><aside class="menu">
