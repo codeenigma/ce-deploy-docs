@@ -12,14 +12,6 @@
         <h1 id="init">Init</h1>
 <p>Mandatory role that must run before any other <code>ce-deploy</code> roles when executing a playbook.</p>
 <p>These variables <strong>must</strong> be set in a common variables file if you do not wish to use defaults.</p>
-<p>In order to manipulate an AWS Autoscaling Group (ASG) your <code>deploy</code> user must have an AWS CLI profile for a user with the following IAM permissions:</p>
-<ul>
-<li><code>autoscaling:ResumeProcesses</code></li>
-<li><code>autoscaling:SuspendProcesses</code></li>
-<li><code>autoscaling:DescribeScalingProcessTypes</code></li>
-<li><code>autoscaling:DescribeAutoScalingGroups</code></li>
-</ul>
-<p>Set the <code>aws_asg.name</code> to the machine name of your ASG in order to automatically suspend and resume autoscaling on build.</p>
 <!--TOC-->
 <!--ENDTOC-->
 <!--ROLEVARS-->
@@ -37,11 +29,6 @@
 </span></span><span style="display:flex;"><span><span style="color:#f92672">ce_deploy_version</span>: <span style="color:#ae81ff">1.</span><span style="color:#ae81ff">x</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">lock_file</span>: <span style="color:#ae81ff">/tmp/ce-deploy-lock</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">provision_lock_file</span>: <span style="color:#ae81ff">/tmp/ce-provision-lock</span> <span style="color:#75715e"># must match _init.lock_file in ce-provision</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># AWS ASG variables to allow for the suspension of autoscaling during a code deployment.</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">aws_asg</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># if the deploy is on an ASG put the name here</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">region</span>: <span style="color:#e6db74">&#34;eu-west-1&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">suspend_processes</span>: <span style="color:#e6db74">&#34;Launch Terminate&#34;</span> <span style="color:#75715e"># space separated string, see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Application specific variables.</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">drupal</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">drush_verbose_output</span>: <span style="color:#66d9ef">false</span>
@@ -140,6 +127,9 @@
 </li>
 <li>
 <a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/api_call" >API call</a>
+</li>
+<li>
+<a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/asg_management" >ASG Management</a>
 </li>
 <li>
 <a href="https://codeenigma.github.io/ce-deploy-docs/1.x/roles/cache_clear" >Config</a>
