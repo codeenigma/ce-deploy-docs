@@ -9,19 +9,17 @@
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.79491ecfb2c47d70d8ee01dcbdaa7ed03bd0c57f2b497b82742ef3eeb30ae0db.css">
 </head>
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
-        <h1 id="phpunit-tests">PHPUnit tests</h1>
-<p>Step that runs PHPUnit against the specified path in the codebase. Requires that you provide a <code>phpunit.xml</code> config file, unless you&rsquo;re using Drupal 8 or above, in one of the following locations:</p>
-<ul>
-<li><code>files/phpunit.xml</code> relative to your playbook</li>
-<li>in the repository root</li>
-<li>in your application&rsquo;s <code>webroot</code> directory</li>
-</ul>
-<p>As a final fallback it checks for 
-<a href="https://git.drupalcode.org/project/drupal/-/blob/11.x/core/phpunit.xml.dist"  target="_blank" rel="noopener">Drupal&rsquo;s default PHPUnit configuration file at <code>web/core/phpunit.xml.dist</code></a>
-.</p>
-<p>Optionally installs PHPUnit with <code>composer</code> if you want it to do so.</p>
-<p>For more information on PHPUnit, see 
-<a href="https://docs.phpunit.de"  target="_blank" rel="noopener">https://docs.phpunit.de</a>
+        <h1 id="php-codesniffer-tests">PHP CodeSniffer tests</h1>
+<p>Step that runs 
+<a href="https://github.com/PHPCSStandards/PHP_CodeSniffer"  target="_blank" rel="noopener">PHP CodeSniffer</a>
+ against the specified path(s) in the codebase.</p>
+<p>Optionally installs PHP CodeSniffer with <code>composer</code> using 
+<a href="https://packagist.org/packages/dealerdirect/phpcodesniffer-composer-installer"  target="_blank" rel="noopener">this package</a>
+ if you want it to do so. Can also install 
+<a href="https://www.drupal.org/project/coder"  target="_blank" rel="noopener">the Coder module for Drupal</a>
+, which provides an installed standard for Drupal.</p>
+<p>For more information on PHP CodeSniffer, see the GitHub wiki: 
+<a href="https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/"  target="_blank" rel="noopener">https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/</a>
 </p>
 <h2 id="using-with-drupal">Using with Drupal</h2>
 <p>Ideally to use the role with Drupal you should start with 
@@ -29,28 +27,59 @@
 , which means having this in your <code>composer.json</code> file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;require-dev&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;drupal/coder&#34;</span>: <span style="color:#e6db74">&#34;^8.3&#34;</span>
+</span></span><span style="display:flex;"><span>  }<span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;config&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;allow-plugins&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;dealerdirect/phpcodesniffer-composer-installer&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;sort-packages&#34;</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></div><p>If you include <code>coder</code> in your application it will automatically download PHPUnit. Leave the Ansible default variables for this role as they are and the role will automatically run PHPUnit tests against the entire <code>modules</code> directory using the default configuration file provided by the Drupal project.</p>
+</span></span></code></pre></div><p>You can then set the Ansible variables as follows to check your custom Drupal themes and modules:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">composer</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">no_dev: false # installs phpcs, phpstan and phpunit - see dependencies</span>: <span style="color:#ae81ff">https://packagist.org/packages/drupal/coder</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">phpcs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">standard</span>: <span style="color:#ae81ff">vendor/drupal/coder/coder_sniffer/Drupal</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extensions</span>: <span style="color:#ae81ff">php,module,inc,theme,install</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_paths</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web/themes/custom</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">web/modules/custom</span>
+</span></span></code></pre></div><h2 id="using-with-other-php-applications">Using with other PHP applications</h2>
+<p>To load PHP CodeSniffer in another <code>composer</code>-based PHP application, this should be sufficient:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;require-dev&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;dealerdirect/phpcodesniffer-composer-installer&#34;</span>: <span style="color:#e6db74">&#34;^1.0&#34;</span>
+</span></span><span style="display:flex;"><span>  }<span style="color:#960050;background-color:#1e0010">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;config&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;allow-plugins&#34;</span>: {
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">&#34;dealerdirect/phpcodesniffer-composer-installer&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;sort-packages&#34;</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>See the installation documentation on packagist: 
+<a href="https://packagist.org/packages/dealerdirect/phpcodesniffer-composer-installer"  target="_blank" rel="noopener">https://packagist.org/packages/dealerdirect/phpcodesniffer-composer-installer</a>
+</p>
 <!--TOC-->
 <!--ENDTOC-->
 <!--ROLEVARS-->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
-</span></span><span style="display:flex;"><span><span style="color:#f92672">phpunit</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install phpunit</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">group</span>: <span style="color:#ae81ff">unit</span> <span style="color:#75715e"># comma separated list of group names to run</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">target</span>: <span style="color:#ae81ff">../modules</span> <span style="color:#75715e"># directory or file to test, defaults to Drupal&#39;s modules directory</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/phpunit&#34;</span> <span style="color:#75715e"># location of phpunit</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests_path</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/{{ webroot }}/core&#34;</span> <span style="color:#75715e"># directory containing the PHPUnit &#39;tests&#39; directory, defaults to Drupal&#39;s core directory</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">phpcs</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span>              <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install PHP CodeSniffer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install_drupal_coder</span>: <span style="color:#66d9ef">false</span>  <span style="color:#75715e"># set to true to install the Coder module for Drupal, which provides a Drupal standard for CodeSniffer</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/phpcs&#34;</span>  <span style="color:#75715e"># location of phpcs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">standard</span>: <span style="color:#e6db74">&#34;&#34;</span>    <span style="color:#75715e"># optionally set the path to an installed standard, for example &#34;vendor/drupal/coder/coder_sniffer/Drupal&#34; for the Coder module for Drupal</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extensions</span>: <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># set optional extensions, for example for Drupal you could set &#34;php,module,inc,theme,install&#34; - defaults to &#34;php,inc/php,js,css&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_paths</span>: []  <span style="color:#75715e"># list of paths to test against</span>
 </span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#phpunit-tests">PHPUnit tests</a>
+    <li><a href="#php-codesniffer-tests">PHP CodeSniffer tests</a>
       <ul>
         <li><a href="#using-with-drupal">Using with Drupal</a></li>
+        <li><a href="#using-with-other-php-applications">Using with other PHP applications</a></li>
         <li><a href="#default-variables">Default variables</a></li>
       </ul>
     </li>

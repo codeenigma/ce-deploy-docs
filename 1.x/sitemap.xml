@@ -108,6 +108,8 @@
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/tests_lhci/</loc>
   </url><url>
+    <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/tests_phpcs/</loc>
+  </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/roles/tests/tests_phpunit/</loc>
   </url><url>
     <loc>https://codeenigma.github.io/ce-deploy-docs/1.x/scripts/</loc>
