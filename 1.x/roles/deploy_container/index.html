@@ -52,6 +52,7 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">container_tag</span>: <span style="color:#ae81ff">latest</span> <span style="color:#75715e"># tag will take format container_name:container_tag</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">container_force_build</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># force Docker to build and tag a new image</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker_registry_name</span>: <span style="color:#ae81ff">index.docker.io/example</span> <span style="color:#75715e"># combines with container_name to make the full registry name, docker_registry_name/container_name</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># docker_registry_url: &#34;https://index.docker.io/v1/&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker_registry_user</span>: <span style="color:#ae81ff">example</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker_registry_pass</span>: <span style="color:#ae81ff">asdf1234</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">docker_base_command</span>: <span style="color:#e6db74">&#34;docker image build&#34;</span>
@@ -76,14 +77,14 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">zone</span>: <span style="color:#ae81ff">example.com</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">aws_profile</span>: <span style="color:#ae81ff">example2</span> <span style="color:#75715e"># might not be the same account</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">vpc_name</span>: <span style="color:#ae81ff">example</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#vpc_id: vpc-XXXXXXX # optionally specify VPC ID to use</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># vpc_id: vpc-XXXXXXX # optionally specify VPC ID to use</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">security_groups</span>: [] <span style="color:#75715e"># list of security groups, accepts names or IDs</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">cluster_name</span>: <span style="color:#ae81ff">example-cluster</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">family_name</span>: <span style="color:#ae81ff">example-task-definition</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_definition_revision</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># integer, but must be presented as a string for Jinja2</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_definition_force_create</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># creates a task definition revision every time if set to true</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_execution_role_arn</span>: <span style="color:#e6db74">&#34;arn:aws:iam::000000000000:role/ecsTaskExecutionRole&#34;</span> <span style="color:#75715e"># ARN of the IAM role to run the task as, must have access to the ECR repository if applicable</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#task_role_arn: &#34;&#34; # required if you set service_enable_ssm to true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># task_role_arn: &#34;&#34; # required if you set service_enable_ssm to true</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_count</span>: <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_minimum_count</span>: <span style="color:#ae81ff">1</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">task_maximum_count</span>: <span style="color:#ae81ff">4</span>
@@ -116,23 +117,23 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">1024</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">launch_type</span>: <span style="color:#ae81ff">FARGATE</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">network_mode</span>: <span style="color:#ae81ff">awsvpc</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">#volumes: [] # list of additional volumes to attach</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># volumes: [] # list of additional volumes to attach</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_name</span>: <span style="color:#ae81ff">example</span> <span style="color:#75715e"># can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_protocol</span>: <span style="color:#ae81ff">http</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_port</span>: <span style="color:#ae81ff">8080</span> <span style="color:#75715e"># ports lower than 1024 will require the app to be configured to run as a privileged user in the Dockerfile</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_wait_timeout</span>: <span style="color:#ae81ff">200</span> <span style="color:#75715e"># how long to wait for target group events to complete</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">targets</span>: [] <span style="color:#75715e"># typically we do not specify targets at this point, this will be handled automatically by the ECS service</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#- Id: 10.0.0.2</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#  Port: 80</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#  AvailabilityZone: all</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># - Id: 10.0.0.2</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#   Port: 80</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#   AvailabilityZone: all</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">health_check</span>:
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">http</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">response_codes</span>: <span style="color:#e6db74">&#34;200&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># optional additional healthcheck settings</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#interval: 60</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#healthy_threshold_count: 3</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#75715e">#unhealthy_threshold_count: 5</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">## optional additional healthcheck settings</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># interval: 60</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># healthy_threshold_count: 3</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e"># unhealthy_threshold_count: 5</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Requires the deploy IAM user to have the managed AWSCertificateManagerFullAccess and AmazonRoute53FullAccess policies attached</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">acm</span>: <span style="color:#75715e"># see https://github.com/codeenigma/ce-provision/tree/1.x/roles/aws/aws_acm</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#f92672">create_cert</span>: <span style="color:#66d9ef">false</span>
