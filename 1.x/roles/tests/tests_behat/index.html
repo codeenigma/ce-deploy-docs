@@ -9,16 +9,39 @@
   <link rel="stylesheet" href="https://codeenigma.github.io/ce-deploy-docs/1.x/css/main.min.79491ecfb2c47d70d8ee01dcbdaa7ed03bd0c57f2b497b82742ef3eeb30ae0db.css">
 </head>
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
-        <h1 id="roles">Roles</h1>
-<p>Ansible roles and group of roles that constitute the deploy stack.</p>
+        <h1 id="behat-tests">Behat tests</h1>
+<p>
+<a href="https://behat.org/"  target="_blank" rel="noopener">Behat</a>
+ is an open source 
+<a href="https://en.wikipedia.org/wiki/Behavior-driven_development"  target="_blank" rel="noopener">Behaviour Driven Development</a>
+ tool for building software that is often used for functional testing.</p>
 <!--TOC-->
 <!--ENDTOC-->
+<!--ROLEVARS-->
+<h2 id="default-variables">Default variables</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
+</span></span><span style="display:flex;"><span><span style="color:#f92672">behat</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span>        <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install Behat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: <span style="color:#e6db74">&#34;~@javascript&#34;</span>  <span style="color:#75715e"># behat tags to run</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">verbose</span>: <span style="color:#66d9ef">false</span>        <span style="color:#75715e"># set to true for verbose output</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/behat&#34;</span>  <span style="color:#75715e"># location of Behat</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># List of outputs to create, defaults to &#39;pretty&#39; to STDOUT</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">outputs</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">format</span>: <span style="color:#ae81ff">pretty </span> <span style="color:#75715e"># options are pretty, progress or junit</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">output</span>: <span style="color:#ae81ff">std    </span> <span style="color:#75715e"># see docs for more information, supports output filepath or various formats</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">config_file</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/tests/behat/behat.yml&#34;</span>  <span style="color:#75715e"># path to config file</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>  <span style="color:#75715e"># path to execute composer from</span>
+</span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>
     <aside>
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#roles">Roles</a></li>
+    <li><a href="#behat-tests">Behat tests</a>
+      <ul>
+        <li><a href="#default-variables">Default variables</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
     </aside><aside class="menu">
