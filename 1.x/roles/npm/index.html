@@ -18,11 +18,16 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># npm/yarn</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">executor</span>: <span style="color:#ae81ff">npm</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">remove_node_modules</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># remove node_modules dir</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># A list of commands to execute.</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># eg:</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - install</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># - build-prod</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">commands</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># drush commands executed from webroot after previous npm commands</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extra_drush_commands</span>: []
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># npm/yarn commands executed from node app dir after previous drush commands</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">extra_npm_commands</span>: []
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Specify any additional symlink to create, with src (target) and dest (link).</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># src: can be either absolute or relative to the dest (eg. &#39;/var/my_data&#39;, &#39;/home/deploy/simplesaml&#39;, &#39;../../../myconfig&#39;)</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># dest: can only be relative to the root of your repository (eg. &#39;www/themes/myassets&#39;, &#39;var/cache&#39;)</span>
