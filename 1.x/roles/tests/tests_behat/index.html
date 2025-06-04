@@ -24,6 +24,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span>        <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install Behat</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">tags</span>: <span style="color:#e6db74">&#34;~@javascript&#34;</span>  <span style="color:#75715e"># behat tags to run</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">verbose</span>: <span style="color:#66d9ef">false</span>        <span style="color:#75715e"># set to true for verbose output</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">fail_builds</span>: <span style="color:#66d9ef">true</span>     <span style="color:#75715e"># set to false if you do not want Ansible to stop if Behat tests fail</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/behat&#34;</span>  <span style="color:#75715e"># location of Behat</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># List of outputs to create, defaults to &#39;pretty&#39; to STDOUT</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">outputs</span>:
