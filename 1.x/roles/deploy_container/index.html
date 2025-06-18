@@ -48,6 +48,7 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span><span style="color:#f92672">deploy_container</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">ce_provision_version</span>: <span style="color:#e6db74">&#34;{{ ce_provision_version }}&#34;</span> <span style="color:#75715e"># used to determine version of ce-provision to fetch roles from</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">action</span>: <span style="color:#ae81ff">create</span> <span style="color:#75715e"># can also be destroy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">create_image</span>: <span style="color:#66d9ef">true</span>  <span style="color:#75715e"># set to false if you are not building an image but deploying an ECS Task Definition with an existing image</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">container_name</span>: <span style="color:#ae81ff">example-container</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">container_tag</span>: <span style="color:#ae81ff">latest</span> <span style="color:#75715e"># tag will take format container_name:container_tag</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">container_force_build</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># force Docker to build and tag a new image</span>
