@@ -123,6 +123,7 @@ sudo usermod -aG docker deploy
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_protocol</span>: <span style="color:#ae81ff">http</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_port</span>: <span style="color:#ae81ff">8080</span> <span style="color:#75715e"># ports lower than 1024 will require the app to be configured to run as a privileged user in the Dockerfile</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_wait_timeout</span>: <span style="color:#ae81ff">200</span> <span style="color:#75715e"># how long to wait for target group events to complete</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">target_group_deregistration_delay_timeout</span>: <span style="color:#ae81ff">60</span>  <span style="color:#75715e"># how long to allow targets to drain for in seconds</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#f92672">targets</span>: [] <span style="color:#75715e"># typically we do not specify targets at this point, this will be handled automatically by the ECS service</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#75715e"># - Id: 10.0.0.2</span>
 </span></span><span style="display:flex;"><span>      <span style="color:#75715e">#   Port: 80</span>
