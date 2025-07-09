@@ -23,8 +23,6 @@
 </span></span><span style="display:flex;"><span><span style="color:#f92672">_mysqldump_params</span>: <span style="color:#e6db74">&#34;--max-allowed-packet=128M --single-transaction --skip-opt -e --quick --skip-disable-keys --skip-add-locks -C -a --add-drop-table&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># @TODO only used by Drupal 7, can be removed with Drupal 7 deployments</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">bin_directory</span>: <span style="color:#e6db74">&#34;/home/{{ deploy_user }}/.bin&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># Number of dumps/db to look up for cleanup.</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">cleanup_history_depth</span>: <span style="color:#ae81ff">50</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">install_php_cachetool</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># set to false if you don&#39;t need cachetool, e.g. for a nodejs app</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">ce_deploy_version</span>: <span style="color:#ae81ff">1.</span><span style="color:#ae81ff">x</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">ce_provision_version</span>: <span style="color:#ae81ff">2.</span><span style="color:#ae81ff">x</span> <span style="color:#75715e"># the version of ce-provision to grab files from when roles are shared</span>
