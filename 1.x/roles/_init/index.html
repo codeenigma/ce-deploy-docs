@@ -30,6 +30,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#f92672">provision_lock_file</span>: <span style="color:#ae81ff">/tmp/ce-provision-lock</span> <span style="color:#75715e"># must match _init.lock_file in ce-provision</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">skip_build_path_check</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># by default we&#39;re checking if track number matches</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">keep_builds</span>: <span style="color:#ae81ff">10</span>  <span style="color:#75715e"># the number of builds to keep in the build history, includes associated databases</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">build_cleanup_pattern</span>: <span style="color:#e6db74">&#34;{{ project_name }}_{{ build_type }}_build_*&#34;</span> <span style="color:#75715e"># name pattern of the builds to be checked for cleanup</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Application specific variables.</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">drupal</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">drush_verbose_output</span>: <span style="color:#66d9ef">false</span>
