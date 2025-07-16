@@ -40,9 +40,9 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install phpunit</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">group</span>: <span style="color:#ae81ff">unit</span> <span style="color:#75715e"># comma separated list of group names to run</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">target</span>: <span style="color:#ae81ff">../modules</span> <span style="color:#75715e"># directory or file to test, defaults to Drupal&#39;s modules directory</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/phpunit&#34;</span> <span style="color:#75715e"># location of phpunit</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests_path</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/{{ webroot }}/core&#34;</span> <span style="color:#75715e"># directory containing the PHPUnit &#39;tests&#39; directory, defaults to Drupal&#39;s core directory</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>  <span style="color:#75715e"># path to execute composer from</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}/vendor/bin/phpunit&#34;</span> <span style="color:#75715e"># location of phpunit</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tests_path</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}/{{ webroot }}/core&#34;</span> <span style="color:#75715e"># directory containing the PHPUnit &#39;tests&#39; directory, defaults to Drupal&#39;s core directory</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}&#34;</span>  <span style="color:#75715e"># path to execute composer from</span>
 </span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>

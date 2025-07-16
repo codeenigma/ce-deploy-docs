@@ -32,8 +32,8 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">main_env</span>: <span style="color:#ae81ff">dev  </span> <span style="color:#75715e"># name of the &#39;good&#39; environment to compare against (must be pre-configured in diffy)</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env</span>: <span style="color:#ae81ff">custom </span> <span style="color:#75715e"># name of the environment to be compared (usually diffy&#39;s default &#39;custom&#39; environment)</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_env_url</span>: <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># set a base URL to use against the diffy &#39;custom&#39; environment</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/diffy&#34;</span>  <span style="color:#75715e"># location of diffy</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>  <span style="color:#75715e"># path to execute composer and related binaries from</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}/vendor/bin/diffy&#34;</span>  <span style="color:#75715e"># location of diffy</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}&#34;</span>  <span style="color:#75715e"># path to execute composer and related binaries from</span>
 </span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>

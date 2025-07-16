@@ -66,11 +66,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#f92672">phpcs</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">install</span>: <span style="color:#66d9ef">false</span>               <span style="color:#75715e"># set to true if you want ce-deploy to attempt to composer install PHP CodeSniffer</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">install_drupal_coder</span>: <span style="color:#66d9ef">false</span>  <span style="color:#75715e"># set to true to install the Coder module for Drupal, which provides a Drupal standard for CodeSniffer</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}/vendor/bin/phpcs&#34;</span>  <span style="color:#75715e"># location of phpcs</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">bin</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}/vendor/bin/phpcs&#34;</span>  <span style="color:#75715e"># location of phpcs</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">standard</span>: <span style="color:#e6db74">&#34;&#34;</span>    <span style="color:#75715e"># optionally set the path to an installed standard, for example &#34;vendor/drupal/coder/coder_sniffer/Drupal&#34; for the Coder module for Drupal</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">extensions</span>: <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># set optional extensions, for example for Drupal you could set &#34;php,module,inc,theme,install&#34; - defaults to &#34;php,inc/php,js,css&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">test_paths</span>: []  <span style="color:#75715e"># list of paths to test against</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ deploy_path }}&#34;</span>  <span style="color:#75715e"># path to execute composer from</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">working_dir</span>: <span style="color:#e6db74">&#34;{{ live_symlink_dest }}&#34;</span>  <span style="color:#75715e"># path to execute composer from</span>
 </span></span></code></pre></div><!--ENDROLEVARS-->
 
     </article>
