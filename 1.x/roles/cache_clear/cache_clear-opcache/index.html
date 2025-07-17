@@ -10,20 +10,13 @@
 </head>
 <body class="doc"><header><a href="https://codeenigma.github.io/ce-deploy-docs/1.x//home">ce-deploy</a></header><article>
         <h1 id="opcache">Opcache</h1>
-<p>Clear opcache.</p>
+<p>Clear opcache. You must have run the <code>cli/cachetool</code> role to install <code>cachetool</code> first.</p>
 <!--TOC-->
 <!--ENDTOC-->
 <!--ROLEVARS-->
 <h2 id="default-variables">Default variables</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>---
 </span></span><span style="display:flex;"><span><span style="color:#f92672">cache_clear_opcache</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Adapter string to use as argument.</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># e.g.</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># --fcgi=127.0.0.1:9000</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># --fcgi=/var/run/php-fpm.sock</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Provide an empty string to use /etc/cachetool.yml</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># adapter: &#34;--fcgi=127.0.0.1:9081&#34;  # Leave commented to automatically detect the adapter based on PHP version.</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">unix_socket</span>: <span style="color:#66d9ef">false</span>  <span style="color:#75715e"># Set to true to use automatic detection of Unix socket as set by ce-provision</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Bins to clear.</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">clear_opcache</span>: <span style="color:#66d9ef">true</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">clear_apcu</span>: <span style="color:#66d9ef">false</span>
