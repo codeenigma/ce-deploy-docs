@@ -61,6 +61,8 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># AWS ASG variables to allow for the suspension of autoscaling during a code deployment.</span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">asg_management</span>:
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#75715e"># if the deploy is on an ASG put the name here</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">#target_group_name: &#34;example&#34; # matches the ASG name by default, specify if your TargetGroup name is different (for example due to the 32-char name length limit in AWS)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">refresh_asg_instances</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># runs only if squashFS image unmount failed and this set to true.</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">#profile: &#34;example&#34; # optional, the boto profile name to use if not the system default</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">region</span>: <span style="color:#e6db74">&#34;eu-west-1&#34;</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#f92672">suspend_processes</span>: <span style="color:#e6db74">&#34;Launch Terminate HealthCheck&#34;</span> <span style="color:#75715e"># space separated string, see https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html</span>
